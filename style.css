@@ -27,7 +27,17 @@ h1, h2, h3 {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; padding: 0; }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    
+    /* Вот эти строки отвечают за отступы по краям */
+    padding-left: 24px;
+    padding-right: 24px;
+    
+    width: 100%; /* Гарантирует, что контейнер занимает место */
+    box-sizing: border-box; /* Важно: включает отступы в общую ширину */
+}
 
 /* --- HEADER --- */
 header { 
@@ -127,16 +137,19 @@ header {
 .benefits li { 
     margin-bottom: 12px; 
     font-size: 1.05rem;
-    display: flex;
-    align-items: center;
+    display: flex; /* Выравнивает иконку и текст */
+    align-items: flex-start; /* Иконка будет сверху, если текст в 2 строки */
+    text-align: left;
 }
 
 .benefits li:before {
     content: "✓"; 
     color: var(--primary); 
     font-weight: bold;
-    margin-right: 12px;
+    margin-right: 12px; /* Расстояние от галочки до текста */
     font-size: 1.2rem;
+    line-height: 1; /* Чтобы галочка не улетала вверх/вниз */
+    flex-shrink: 0; /* Запрещает сжимать галочку */
 }
 
 /* --- PRICING --- */
