@@ -114,7 +114,7 @@ header { padding: 20px 0; background: var(--bg); }
     margin-bottom: 40px; 
     
     /* Ограничиваем ширину, чтобы текст встал в 2 красивые строки */
-    max-width: 500px; 
+    max-width: 700px; 
     
     /* Центрируем блок с текстом */
     margin-left: auto;
