@@ -1,10 +1,14 @@
+/* --- GLOBAL RESET --- */
+* {
+    box-sizing: border-box; /* Самое важное: отступы не ломают ширину */
+}
+
 :root {
-    /* Цвета взяты с фото (пипеткой) */
-    --primary: #7A4B5F; /* Глубокий сливовый (цвет мяча) */
+    --primary: #7A4B5F;
     --primary-hover: #5E3A49;
-    --bg: #F5F5F7; /* Светло-серый (как фон студии) */
+    --bg: #F5F5F7;
     --card-bg: #FFFFFF;
-    --text: #2C2C2C; /* Почти черный */
+    --text: #2C2C2C;
     --grey-text: #666666;
 }
 
@@ -16,6 +20,7 @@ body {
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden; /* Запрещает горизонтальную прокрутку */
 }
 
 h1, h2, h3 { 
@@ -27,23 +32,19 @@ h1, h2, h3 {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; padding: 0; }
 
+/* --- CONTAINER (ГЛАВНЫЙ БЛОК) --- */
 .container { 
     max-width: 1100px; 
     margin: 0 auto; 
     
-    /* Вот эти строки отвечают за отступы по краям */
+    /* ЖЕСТКИЙ ОТСТУП ДЛЯ ВСЕХ УСТРОЙСТВ */
     padding-left: 24px;
     padding-right: 24px;
-    
-    width: 100%; /* Гарантирует, что контейнер занимает место */
-    box-sizing: border-box; /* Важно: включает отступы в общую ширину */
+    width: 100%;
 }
 
 /* --- HEADER --- */
-header { 
-    padding: 20px 0; 
-    background: var(--bg); /* Прозрачный переход */
-}
+header { padding: 20px 0; background: var(--bg); }
 
 .header-content { 
     display: flex; 
@@ -59,17 +60,19 @@ header {
     color: var(--text);
 }
 
-/* Кнопки */
+/* --- BUTTONS --- */
 .btn-primary {
     background: var(--primary); 
     color: #fff;
-    padding: 12px 28px; 
+    padding: 14px 32px; 
     border-radius: 50px; 
     transition: 0.3s; 
     font-weight: 500;
-    font-size: 0.95rem;
-    white-space: nowrap; /* ЗАПРЕЩАЕТ перенос текста */
+    font-size: 1rem;
     display: inline-block;
+    border: none;
+    cursor: pointer;
+    text-align: center;
     box-shadow: 0 4px 15px rgba(122, 75, 95, 0.2);
 }
 
@@ -85,21 +88,15 @@ header {
     border-radius: 50px; 
     display: block; 
     text-align: center; 
-    margin-top: auto; /* Прижимает кнопку к низу карточки */
+    margin-top: auto; 
     font-weight: 600;
     transition: 0.3s;
 }
 
-.btn-outline:hover { 
-    background: var(--primary); 
-    color: #fff; 
-}
+.btn-outline:hover { background: var(--primary); color: #fff; }
 
-/* --- HERO SECTION --- */
-.hero { 
-    padding: 60px 0 80px; 
-    text-align: center; 
-}
+/* --- HERO --- */
+.hero { padding: 60px 0 80px; text-align: center; }
 
 .hero h1 { 
     font-size: 3.5rem; 
@@ -119,148 +116,65 @@ header {
 
 /* --- ABOUT --- */
 .about { padding: 80px 0; }
-
-.about-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 60px; 
-    align-items: center; 
-}
-
-.about-image img { 
-    width: 100%; 
-    border-radius: 20px; 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
-    object-fit: cover; /* На всякий случай */
-}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: block; }
 
 .benefits li { 
-    margin-bottom: 12px; 
-    font-size: 1.05rem;
-    display: flex; /* Выравнивает иконку и текст */
-    align-items: flex-start; /* Иконка будет сверху, если текст в 2 строки */
-    text-align: left;
+    margin-bottom: 12px; font-size: 1.05rem; display: flex; align-items: flex-start; 
 }
-
 .benefits li:before {
-    content: "✓"; 
-    color: var(--primary); 
-    font-weight: bold;
-    margin-right: 12px; /* Расстояние от галочки до текста */
-    font-size: 1.2rem;
-    line-height: 1; /* Чтобы галочка не улетала вверх/вниз */
-    flex-shrink: 0; /* Запрещает сжимать галочку */
+    content: "✓"; color: var(--primary); font-weight: bold; margin-right: 12px; font-size: 1.2rem; line-height: 1.4; flex-shrink: 0;
 }
 
 /* --- PRICING --- */
 .pricing { padding: 80px 0; text-align: center; }
-
-.cards { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; 
-    margin-top: 50px; 
-}
-
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
 .card { 
-    background: var(--card-bg); 
-    padding: 40px; 
-    border-radius: 24px; 
-    text-align: left; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: 0.3s;
+    background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: left; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); display: flex; flex-direction: column; 
+    border: 1px solid rgba(0,0,0,0.03); transition: 0.3s;
 }
-
 .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
-
 .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-.card .desc { font-size: 0.95rem; color: var(--grey-text); min-height: 45px; }
-
-.price { 
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin: 20px 0 30px; 
-    color: var(--primary); 
-}
+.price { font-size: 2rem; font-weight: 700; margin: 20px 0 30px; color: var(--primary); }
 .price span { font-size: 1rem; font-weight: 400; color: var(--grey-text); }
-
-.card ul { margin-bottom: 30px; }
-.card ul li { margin-bottom: 12px; font-size: 1rem; color: var(--text); }
-.card ul li:before { content: "•"; color: var(--primary); margin-right: 10px; font-size: 1.2rem; }
+.card ul li { margin-bottom: 12px; display: flex; align-items: flex-start; }
+.card ul li:before { content: "•"; color: var(--primary); margin-right: 10px; font-size: 1.5rem; line-height: 1; }
 
 /* --- FOOTER --- */
-.footer { 
-    background: #252525; 
-    color: #bbb; 
-    padding: 60px 0 30px; 
-    margin-top: 80px; 
-    font-size: 0.9rem; 
-}
-
-.footer-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    gap: 40px; 
-    margin-bottom: 50px; 
-}
-
+.footer { background: #252525; color: #bbb; padding: 60px 0 30px; margin-top: 80px; font-size: 0.9rem; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
 .footer h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; }
 .footer a { display: block; margin-bottom: 10px; transition: 0.2s; }
 .footer a:hover { color: #fff; }
 .copyright { text-align: center; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem; }
 
-/* --- MOBILE ADAPTATION --- */
+/* --- MOBILE (ТЕЛЕФОНЫ) --- */
 @media (max-width: 768px) {
-    /* 1. Отступы контейнера (страховка) */
+    /* 1. Увеличиваем отступы, чтобы текст не лип к краям */
     .container {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 24px;  /* Было 0 или мало */
+        padding-right: 24px;
     }
 
-    /* 2. Шапка: Центрируем лого и кнопку */
+    /* 2. Центрируем шапку */
     .header-content {
-        flex-direction: column; /* Друг под другом */
+        flex-direction: column;
         gap: 20px;
-        align-items: center; /* Выравнивание по центру оси */
     }
     
-    .logo {
-        margin-bottom: 5px; /* Небольшой отступ от верха */
-    }
-    
-    /* 3. Кнопки на мобильном */
+    /* 3. Кнопки на мобильном - во всю ширину КОНТЕЙНЕРА */
+    /* Теперь они будут ровно от края до края (минус 24px отступа) */
     .btn-primary {
-        width: 100%;       /* Растянуть на всю ширину */
-        max-width: 350px;  /* Но не шире, чем 350px (чтобы на планшете не было гигантской кнопки) */
-        text-align: center;
-        display: block;    /* Важно для выравнивания */
-        margin: 0 auto;    /* Центрирование самой кнопки */
+        width: 100%;
+        display: block;
+        box-sizing: border-box; /* Чтобы padding не увеличивал кнопку */
     }
 
-    /* 4. Герой (Заголовок) */
-    .hero h1 { 
-        font-size: 2.5rem; 
-        line-height: 1.2;
-    }
-    .hero p { 
-        font-size: 1.1rem; 
-    }
-
-    /* 5. Блоки О тренере */
-    .about-grid { 
-        grid-template-columns: 1fr; 
-        gap: 30px; 
-    }
-    .about-image { 
-        order: -1; /* Фото сверху */
-        margin-bottom: 10px;
-    }
+    .hero h1 { font-size: 2.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image { order: -1; } /* Фото сверху */
     
-    /* Уменьшаем вертикальные отступы между секциями */
-    .about, .hero, .pricing { 
-        padding: 40px 0; 
-    }
+    /* Убираем лишние отступы секций */
+    .hero, .about, .pricing { padding: 40px 0; }
 }
