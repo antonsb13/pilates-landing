@@ -279,4 +279,15 @@ header { padding: 20px 0; background: var(--bg); }
         padding-top: 40px; 
         padding-bottom: 40px; 
     }
+        /* Заставляем подвал быть в 1 колонку и занимать всю ширину */
+    .footer-grid {
+        grid-template-columns: 1fr; /* Одна колонка на всю ширину */
+        gap: 30px; /* Чуть уменьшим расстояние между блоками по вертикали */
+    }
+    .footer-col p {
+        white-space: nowrap; /* Запрет переноса строк в абзацах подвала */
+    }
+    .footer-col p:last-child {
+        white-space: normal;
+    }
 }
