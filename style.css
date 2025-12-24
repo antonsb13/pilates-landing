@@ -112,7 +112,11 @@ header { padding: 20px 0; background: var(--bg); }
     font-size: 1.25rem; 
     color: var(--grey-text); 
     margin-bottom: 40px; 
-    max-width: 600px;
+    
+    /* Ограничиваем ширину, чтобы текст встал в 2 красивые строки */
+    max-width: 500px; 
+    
+    /* Центрируем блок с текстом */
     margin-left: auto;
     margin-right: auto;
 }
@@ -143,36 +147,43 @@ header { padding: 20px 0; background: var(--bg); }
 }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+/* --- КАРТОЧКА ТОВАРА --- */
 .card { 
     background: var(--card-bg); 
     padding: 40px; 
     border-radius: 24px; 
     text-align: left; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-    display: flex; 
-    flex-direction: column; 
     border: 1px solid rgba(0,0,0,0.03); 
     transition: 0.3s;
-    height: 100%; /* Карточка растягивается на всю высоту ячейки */
+    
+    /* Flexbox для выравнивания */
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; /* Растягиваем на всю высоту ячейки сетки */
 }
 .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
 .card h3 { 
     font-size: 1.5rem; 
     margin-bottom: 10px;
-    /* Задаем высоту под 2 строки, чтобы заголовки были на одном уровне */
-    min-height: 3.6rem; 
-    display: flex;
-    align-items: flex-start; /* Текст сверху */
+    min-height: 3.6rem; /* Под 2 строки */
+    display: flex; align-items: flex-start;
 }
+
 .card .desc { 
     font-size: 0.95rem; 
     color: var(--grey-text); 
-    /* Задаем фиксированную высоту, чтобы цена начиналась на одной линии */
-    min-height: 80px; 
+    min-height: 75px; /* Под 3 строки */
+    margin-bottom: 0; /* Убираем лишний отступ снизу */
 }
-.price { font-size: 2rem; font-weight: 700; margin: 20px 0 30px; color: var(--primary); }
+.price { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin: 20px 0 30px; 
+    color: var(--primary); 
+}
 .price span { font-size: 1rem; font-weight: 400; color: var(--grey-text); }
-.card ul li { margin-bottom: 12px; display: flex; align-items: flex-start; }
+.card ul li { margin-bottom: 30px; flex-grow: 1; display: flex; align-items: flex-start; }
 .card ul li:before { content: "•"; color: var(--primary); margin-right: 10px; font-size: 1.5rem; line-height: 1; }
 
 
