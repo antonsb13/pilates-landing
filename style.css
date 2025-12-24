@@ -214,28 +214,53 @@ header {
 
 /* --- MOBILE ADAPTATION --- */
 @media (max-width: 768px) {
-    /* 1. Исправление шапки */
+    /* 1. Отступы контейнера (страховка) */
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* 2. Шапка: Центрируем лого и кнопку */
     .header-content {
-        flex-direction: column; /* Элементы друг под другом */
-        gap: 15px; /* Отступ между лого и кнопкой */
+        flex-direction: column; /* Друг под другом */
+        gap: 20px;
+        align-items: center; /* Выравнивание по центру оси */
     }
     
+    .logo {
+        margin-bottom: 5px; /* Небольшой отступ от верха */
+    }
+    
+    /* 3. Кнопки на мобильном */
     .btn-primary {
-        width: 100%; /* Кнопка во всю ширину */
+        width: 100%;       /* Растянуть на всю ширину */
+        max-width: 350px;  /* Но не шире, чем 350px (чтобы на планшете не было гигантской кнопки) */
         text-align: center;
-        padding: 14px 20px; /* Чуть больше палец */
+        display: block;    /* Важно для выравнивания */
+        margin: 0 auto;    /* Центрирование самой кнопки */
     }
 
-    /* 2. Шрифты поменьше */
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1.1rem; }
+    /* 4. Герой (Заголовок) */
+    .hero h1 { 
+        font-size: 2.5rem; 
+        line-height: 1.2;
+    }
+    .hero p { 
+        font-size: 1.1rem; 
+    }
 
-    /* 3. Блоки О тренере */
-    .about-grid { grid-template-columns: 1fr; gap: 30px; }
-    .about-image { order: -1; /* Фото сверху, текст снизу */ }
+    /* 5. Блоки О тренере */
+    .about-grid { 
+        grid-template-columns: 1fr; 
+        gap: 30px; 
+    }
+    .about-image { 
+        order: -1; /* Фото сверху */
+        margin-bottom: 10px;
+    }
     
-    .about { padding: 40px 0; }
-    .hero { padding: 40px 0 60px; }
-    
-    .pricing .cards { gap: 20px; }
+    /* Уменьшаем вертикальные отступы между секциями */
+    .about, .hero, .pricing { 
+        padding: 40px 0; 
+    }
 }
