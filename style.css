@@ -1,6 +1,6 @@
 /* --- GLOBAL RESET --- */
 * {
-    box-sizing: border-box; /* Самое важное: отступы не ломают ширину */
+    box-sizing: border-box; 
 }
 
 :root {
@@ -20,7 +20,7 @@ body {
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Запрещает горизонтальную прокрутку */
+    overflow-x: hidden;
 }
 
 h1, h2, h3 { 
@@ -36,9 +36,7 @@ ul { list-style: none; padding: 0; }
 .container { 
     max-width: 1100px; 
     margin: 0 auto; 
-    
-    /* ЖЕСТКИЙ ОТСТУП ДЛЯ ВСЕХ УСТРОЙСТВ */
-    padding-left: 24px;
+    padding-left: 24px;  /* Эти отступы теперь будут работать */
     padding-right: 24px;
     width: 100%;
 }
@@ -96,7 +94,12 @@ header { padding: 20px 0; background: var(--bg); }
 .btn-outline:hover { background: var(--primary); color: #fff; }
 
 /* --- HERO --- */
-.hero { padding: 60px 0 80px; text-align: center; }
+/* ИСПРАВЛЕНО: задаем только верх/низ, чтобы не сбивать бока */
+.hero { 
+    padding-top: 60px; 
+    padding-bottom: 80px; 
+    text-align: center; 
+}
 
 .hero h1 { 
     font-size: 3.5rem; 
@@ -115,7 +118,12 @@ header { padding: 20px 0; background: var(--bg); }
 }
 
 /* --- ABOUT --- */
-.about { padding: 80px 0; }
+/* ИСПРАВЛЕНО: задаем только верх/низ */
+.about { 
+    padding-top: 80px; 
+    padding-bottom: 80px; 
+}
+
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: block; }
 
@@ -127,7 +135,13 @@ header { padding: 20px 0; background: var(--bg); }
 }
 
 /* --- PRICING --- */
-.pricing { padding: 80px 0; text-align: center; }
+/* ИСПРАВЛЕНО: задаем только верх/низ */
+.pricing { 
+    padding-top: 80px; 
+    padding-bottom: 80px; 
+    text-align: center; 
+}
+
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
 .card { 
     background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: left; 
@@ -151,30 +165,33 @@ header { padding: 20px 0; background: var(--bg); }
 
 /* --- MOBILE (ТЕЛЕФОНЫ) --- */
 @media (max-width: 768px) {
-    /* 1. Увеличиваем отступы, чтобы текст не лип к краям */
+    /* 1. На всякий случай дублируем отступы */
     .container {
-        padding-left: 24px;  /* Было 0 или мало */
+        padding-left: 24px;
         padding-right: 24px;
     }
 
-    /* 2. Центрируем шапку */
+    /* 2. Шапка */
     .header-content {
         flex-direction: column;
         gap: 20px;
     }
     
-    /* 3. Кнопки на мобильном - во всю ширину КОНТЕЙНЕРА */
-    /* Теперь они будут ровно от края до края (минус 24px отступа) */
+    /* 3. Кнопки на мобильном */
     .btn-primary {
         width: 100%;
         display: block;
-        box-sizing: border-box; /* Чтобы padding не увеличивал кнопку */
     }
 
     .hero h1 { font-size: 2.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-image { order: -1; } /* Фото сверху */
     
-    /* Убираем лишние отступы секций */
-    .hero, .about, .pricing { padding: 40px 0; }
+    /* Блоки О тренере */
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image { order: -1; }
+    
+    /* ИСПРАВЛЕНО: на мобильном тоже задаем только вертикальные отступы */
+    .hero, .about, .pricing { 
+        padding-top: 40px; 
+        padding-bottom: 40px; 
+    }
 }
