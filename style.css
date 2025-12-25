@@ -139,16 +139,24 @@ header { padding: 20px 0; background: var(--bg); }
 .about-image img { 
     width: 100%; 
     border-radius: 20px; 
-    
-    /* УБИРАЕМ ТЕНЬ, чтобы края были мягкими */
-    box-shadow: none; 
-    
+    box-shadow: none; /* Тень убираем */
     display: block; 
     
-    /* МАГИЯ МАСКИ (Растушевка) */
-    /* Делаем картинку видимой в центре (черный) и прозрачной к краям */
-    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
-    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    /* --- НОВАЯ МАСКА (ПРЯМОУГОЛЬНАЯ) --- */
+    
+    /* 1. Определяем два градиента: Вертикальный и Горизонтальный */
+    /* transparent -> black (видно) -> transparent */
+    /* 5% по краям - это зона размытия. Хотите больше мыла? Ставьте 10% или 15% */
+    --mask-vert: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    --mask-horiz: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+
+    /* 2. Применяем оба градиента сразу */
+    -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
+    mask-image: var(--mask-vert), var(--mask-horiz);
+
+    /* 3. Магия: показываем только то место, где оба градиента пересекаются (черные) */
+    -webkit-mask-composite: source-in; /* Для Chrome/Safari/iOS */
+    mask-composite: intersect;         /* Стандарт для Firefox */
 }
 
 /* Список преимуществ с галочками */
@@ -188,12 +196,17 @@ header { padding: 20px 0; background: var(--bg); }
     height: 100%;
     min-height: 350px;
     
-    /* УБИРАЕМ ТЕНЬ */
     box-shadow: none;
     
-    /* ТА ЖЕ МАСКА */
-    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
-    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    /* --- ТА ЖЕ ПРЯМОУГОЛЬНАЯ МАСКА --- */
+    --mask-vert: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    --mask-horiz: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+
+    -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
+    mask-image: var(--mask-vert), var(--mask-horiz);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
 }
 
 .req-item {
@@ -398,12 +411,19 @@ header { padding: 20px 0; background: var(--bg); }
     }
     .req-image img {
         width: 100%;
-        height: auto;
+        height: auto;     
         max-height: 400px;
         object-fit: cover;
-                /* На телефоне делаем края чуть четче (85%), чтобы было видно детали */
-        -webkit-mask-image: radial-gradient(ellipse at center, black 85%, transparent 100%);
-        mask-image: radial-gradient(ellipse at center, black 85%, transparent 100%);
+        
+        /* На телефоне делаем размытие совсем тонким (3%), чтобы не съесть картинку */
+        --mask-vert: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
+        --mask-horiz: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+
+        -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
+        mask-image: var(--mask-vert), var(--mask-horiz);
+        
+        -webkit-mask-composite: source-in;
+        mask-composite: intersect;
     }
     .req-icon {
         width: 90px; /* Чуть меньше иконки на телефоне */
