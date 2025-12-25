@@ -278,19 +278,26 @@ header { padding: 20px 0; background: var(--bg); }
 
 .req-item:last-child { margin-bottom: 0; }
 
+/* Кружок для иконки */
 .req-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;  /* Чуть увеличил размер кружка */
+    height: 60px;
     flex-shrink: 0;
     margin-right: 20px;
-    color: var(--primary);
     background: #fff;
-    border-radius: 50%; /* Круглая подложка */
-    padding: 10px;
+    border-radius: 50%;
+    padding: 12px; /* Отступ внутри кружка до картинки */
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* Сама картинка внутри кружка */
+.req-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Картинка впишется и не обрежется */
+    display: block;
 }
 
 .req-text {
@@ -379,18 +386,29 @@ header { padding: 20px 0; background: var(--bg); }
     .footer-col p:last-child {
         white-space: normal;
     }
-    /* Адаптация блока требований */
+    /* Исправление блока требований */
     .req-grid {
-        grid-template-columns: 1fr; /* Одна колонка */
-        gap: 30px;
+        display: flex;       /* Используем Flex вместо Grid для мобилок */
+        flex-direction: column; /* Строго вертикально */
+        gap: 40px;           /* Отступ между фото и списком */
     }
     
     .req-image {
-        order: -1; /* Картинка сверху */
-        height: 250px; /* Фикс высота на телефоне */
+        order: -1;           /* Картинку наверх */
+        width: 100%;
+        height: 250px;       /* Фиксированная высота */
+        margin-bottom: 10px; /* Доп. отступ безопасности */
     }
     
     .req-image img {
+        width: 100%;
         height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    
+    /* Делаем пункты списка чуть компактнее на телефоне */
+    .req-item {
+        align-items: center; /* Центрируем иконку и текст по вертикали */
     }
 }
