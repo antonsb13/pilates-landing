@@ -278,20 +278,19 @@ header { padding: 20px 0; background: var(--bg); }
 
 .req-item:last-child { margin-bottom: 0; }
 
-/* --- ИКОНКИ ТРЕБОВАНИЙ (БЕЗ КРУЖКОВ) --- */
+/* --- ИКОНКИ ТРЕБОВАНИЙ --- */
 .req-item {
     display: flex;
-    align-items: flex-start; /* Иконка прижата к верху, напротив заголовка */
-    margin-bottom: 30px;
+    align-items: center; /* Центрируем иконку и текст по вертикали */
+    margin-bottom: 40px; /* Чуть больше отступ между пунктами */
 }
 
 .req-icon {
-    width: 45px;  /* Размер иконки (как просили, примерно с заголовок) */
-    height: 45px;
-    flex-shrink: 0; /* Запрещаем сжиматься */
-    margin-right: 20px;
+    width: 80px;  /* УВЕЛИЧИЛ РАЗМЕР (было 45px) */
+    height: 80px;
+    flex-shrink: 0;
+    margin-right: 25px; /* Больше отступ до текста */
     
-    /* Убрали фон, тени и скругления */
     background: transparent;
     border-radius: 0;
     padding: 0;
@@ -305,10 +304,9 @@ header { padding: 20px 0; background: var(--bg); }
 .req-icon img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Картинка сохраняет пропорции */
+    object-fit: contain;
     display: block;
 }
-
 .req-text {
     font-size: 1rem;
     color: var(--grey-text);
@@ -396,34 +394,38 @@ header { padding: 20px 0; background: var(--bg); }
         white-space: normal;
     }
 
-    /* Исправление наложения в блоке требований */
+    /* Исправление наложения (Flexbox метод) */
     .req-grid {
-        display: block; /* Отключаем Grid/Flex, чтобы блоки шли потоком */
+        display: flex;          /* Включаем Flex */
+        flex-direction: column; /* Элементы строго вертикально */
+        gap: 40px;              /* Расстояние между фото и списком */
     }
     
     .req-image {
+        order: -1;        /* Переносим картинку наверх */
         width: 100%;
-        height: 250px;
-        margin-bottom: 40px; /* ЖЕСТКИЙ ОТСТУП СНИЗУ: Текст не сможет наехать */
+        height: auto;     /* ВАЖНО: Высота автоматическая, по размеру картинки */
+        margin-bottom: 0; /* Отступ регулируется через gap выше */
         display: block;
-        position: relative; /* Сброс позиционирования */
     }
     
     .req-image img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;     /* Картинка сохраняет пропорции */
+        display: block;
         border-radius: 20px;
+        max-height: 400px; /* Ограничение, чтобы не была гигантской на планшетах */
+        object-fit: cover;
     }
     
-    /* Дополнительно: выравнивание иконок на мобильном */
-    .req-item {
-        align-items: flex-start; /* Иконка всегда сверху */
-    }
-    
+    /* Иконки на мобильном чуть меньше, но все равно крупные */
     .req-icon {
-        width: 40px; /* Чуть меньше для телефона */
-        height: 40px;
-        margin-right: 15px;
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
+    
+    .req-item {
+        align-items: flex-start; /* На телефоне лучше по верхнему краю, если текст длинный */
     }
 }
