@@ -286,10 +286,10 @@ header { padding: 20px 0; background: var(--bg); }
 }
 
 .req-icon {
-    width: 80px;  /* УВЕЛИЧИЛ РАЗМЕР (было 45px) */
-    height: 80px;
+    width: 100px;  /* УВЕЛИЧИЛ РАЗМЕР (было 45px) */
+    height: 100px;
     flex-shrink: 0;
-    margin-right: 25px; /* Больше отступ до текста */
+    margin-right: 20px; /* Больше отступ до текста */
     
     background: transparent;
     border-radius: 0;
@@ -420,8 +420,8 @@ header { padding: 20px 0; background: var(--bg); }
     
     /* Иконки на мобильном чуть меньше, но все равно крупные */
     .req-icon {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
         margin-right: 20px;
     }
     
