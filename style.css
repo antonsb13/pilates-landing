@@ -14,8 +14,10 @@
     --text: #2C2C2C;         /* Основной цвет текста */
     --grey-text: #666666;    /* Цвет вспомогательного текста */
 }
-html {
-    scroll-behavior: smooth; /* Это делает прокрутку плавной */
+html, body {
+    scroll-behavior: smooth;
+    /* Важно для iOS: иногда помогает добавление этого свойства */
+    -webkit-overflow-scrolling: touch; 
 }
 /* --- ОБЩИЕ СТИЛИ ДЛЯ СТРАНИЦЫ --- */
 body {
