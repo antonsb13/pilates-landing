@@ -248,6 +248,95 @@ header { padding: 20px 0; background: var(--bg); }
 .footer a:hover { color: #fff; }
 .copyright { text-align: center; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem; }
 
+/* --- REQUIREMENTS SECTION (Для занятий) --- */
+.requirements {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.req-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Текст занимает чуть больше места */
+    gap: 50px;
+    align-items: center;
+}
+
+.req-image img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    height: 100%;
+    min-height: 350px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.req-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.req-item:last-child { margin-bottom: 0; }
+
+.req-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    margin-right: 20px;
+    color: var(--primary);
+    background: #fff;
+    border-radius: 50%; /* Круглая подложка */
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.req-text {
+    font-size: 1rem;
+    color: var(--grey-text);
+}
+
+.req-text strong {
+    display: block;
+    color: var(--text);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+/* --- SOCIAL ICONS (Соцсети) --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%; /* Круглые кнопки */
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-links a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.social-links svg {
+    width: 22px;
+    height: 22px;
+}
+
 /* --- MOBILE (ТЕЛЕФОНЫ) --- */
 @media (max-width: 768px) {
     /* 1. На всякий случай дублируем отступы */
@@ -289,5 +378,19 @@ header { padding: 20px 0; background: var(--bg); }
     }
     .footer-col p:last-child {
         white-space: normal;
+    }
+    /* Адаптация блока требований */
+    .req-grid {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 30px;
+    }
+    
+    .req-image {
+        order: -1; /* Картинка сверху */
+        height: 250px; /* Фикс высота на телефоне */
+    }
+    
+    .req-image img {
+        height: 100%;
     }
 }
