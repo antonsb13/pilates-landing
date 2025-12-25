@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     
     <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
-    <link rel="stylesheet" href="style.css?v=110">
+    <link rel="stylesheet" href="style.css?v=200">
     
     <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,28 +222,54 @@
         </div>
     </footer>
     
-<!-- Скрипт для плавной прокрутки (Hard version) -->
+<!-- NUCLEAR SMOOTH SCROLL SCRIPT -->
     <script>
+        // Функция математического сглаживания (разгон и торможение)
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        // Основная функция прокрутки
+        function smoothScroll(target, duration) {
+            var targetElement = document.querySelector(target);
+            if (!targetElement) return;
+
+            // Вычисляем позицию. -50 нужно для отступа сверху (если есть шапка)
+            // Если шапка не фиксированная, можно убрать -50
+            var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset; 
+            var startPosition = window.pageYOffset;
+            var distance = targetPosition - startPosition;
+            var startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                var timeElapsed = currentTime - startTime;
+                
+                // Вычисляем следующий шаг
+                var run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                
+                // Двигаем экран
+                window.scrollTo(0, run);
+
+                // Если время не вышло, продолжаем двигать
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // Вешаем обработчик на все ссылки с решеткой #
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    // Вычисляем точную позицию элемента относительно верха страницы
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset;
-
-                    // Принудительно крутим окно
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
+                // Запускаем прокрутку за 1000 мс (1 секунда)
+                smoothScroll(this.getAttribute('href'), 1000);
             });
         });
     </script>
+
 </body>
 </html>
