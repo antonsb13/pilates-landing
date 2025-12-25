@@ -278,25 +278,34 @@ header { padding: 20px 0; background: var(--bg); }
 
 .req-item:last-child { margin-bottom: 0; }
 
-/* Кружок для иконки */
+/* --- ИКОНКИ ТРЕБОВАНИЙ (БЕЗ КРУЖКОВ) --- */
+.req-item {
+    display: flex;
+    align-items: flex-start; /* Иконка прижата к верху, напротив заголовка */
+    margin-bottom: 30px;
+}
+
 .req-icon {
-    width: 60px;  /* Чуть увеличил размер кружка */
-    height: 60px;
-    flex-shrink: 0;
+    width: 45px;  /* Размер иконки (как просили, примерно с заголовок) */
+    height: 45px;
+    flex-shrink: 0; /* Запрещаем сжиматься */
     margin-right: 20px;
-    background: #fff;
-    border-radius: 50%;
-    padding: 12px; /* Отступ внутри кружка до картинки */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    
+    /* Убрали фон, тени и скругления */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    
     display: flex;
     align-items: center;
     justify-content: center;
 }
-/* Сама картинка внутри кружка */
+
 .req-icon img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Картинка впишется и не обрежется */
+    object-fit: contain; /* Картинка сохраняет пропорции */
     display: block;
 }
 
@@ -386,29 +395,35 @@ header { padding: 20px 0; background: var(--bg); }
     .footer-col p:last-child {
         white-space: normal;
     }
-    /* Исправление блока требований */
+
+    /* Исправление наложения в блоке требований */
     .req-grid {
-        display: flex;       /* Используем Flex вместо Grid для мобилок */
-        flex-direction: column; /* Строго вертикально */
-        gap: 40px;           /* Отступ между фото и списком */
+        display: block; /* Отключаем Grid/Flex, чтобы блоки шли потоком */
     }
     
     .req-image {
-        order: -1;           /* Картинку наверх */
         width: 100%;
-        height: 250px;       /* Фиксированная высота */
-        margin-bottom: 10px; /* Доп. отступ безопасности */
+        height: 250px;
+        margin-bottom: 40px; /* ЖЕСТКИЙ ОТСТУП СНИЗУ: Текст не сможет наехать */
+        display: block;
+        position: relative; /* Сброс позиционирования */
     }
     
     .req-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 15px;
+        border-radius: 20px;
     }
     
-    /* Делаем пункты списка чуть компактнее на телефоне */
+    /* Дополнительно: выравнивание иконок на мобильном */
     .req-item {
-        align-items: center; /* Центрируем иконку и текст по вертикали */
+        align-items: flex-start; /* Иконка всегда сверху */
+    }
+    
+    .req-icon {
+        width: 40px; /* Чуть меньше для телефона */
+        height: 40px;
+        margin-right: 15px;
     }
 }
