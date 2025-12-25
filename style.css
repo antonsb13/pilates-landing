@@ -171,7 +171,7 @@ header { padding: 20px 0; background: var(--bg); }
     display: grid;
     grid-template-columns: 1fr 1.2fr; /* Текст занимает чуть больше места */
     gap: 50px;
-    align-items: center;
+    align-items: start; /* Выравнивание картинки и текста справа */
 }
 
 .req-image img {
@@ -185,7 +185,7 @@ header { padding: 20px 0; background: var(--bg); }
 
 .req-item {
     display: flex;
-    align-items: center; /* Центрируем иконку и текст по вертикали */
+    align-items: flex-start; /* Иконка прижата к верху */
     margin-bottom: 40px; /* Отступ между пунктами */
 }
 
