@@ -288,23 +288,52 @@ header { padding: 20px 0; background: var(--bg); }
 .copyright { text-align: center; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem; }
 
 /* Соцсети (круглые иконки) */
+/* --- СОЦСЕТИ (ЦВЕТНЫЕ) --- */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 20px; /* Чуть увеличил расстояние */
     margin-bottom: 20px;
 }
+
+/* Общие стили кнопки */
 .social-links a {
-    width: 44px; height: 44px;
+    width: 48px;  /* Чуть крупнее */
+    height: 48px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
+    color: #fff; /* Иконка всегда белая */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: none; /* Убираем рамки */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Легкая тень */
 }
-.social-links a:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
-.social-links svg { width: 22px; height: 22px; }
+
+.social-links a:hover { 
+    transform: translateY(-3px) scale(1.05); /* Приятное увеличение */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+.social-links svg { 
+    width: 24px; 
+    height: 24px; 
+}
+
+/* 1. INSTAGRAM (Фирменный градиент) */
+.icon-insta {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* 2. YOUTUBE (Красный) */
+.icon-yt {
+    background: #FF0000;
+}
+
+/* 3. RUTUBE (Синий градиент) */
+.icon-rutube {
+    background: linear-gradient(135deg, #0044BB 0%, #0088FF 100%);
+}
 
 
 /* --- АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА --- */
