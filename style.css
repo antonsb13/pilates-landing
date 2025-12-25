@@ -196,7 +196,7 @@ header { padding: 20px 0; background: var(--bg); }
     flex-shrink: 0;
     margin-right: 15px; /* Отступ до текста */
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 }
 
