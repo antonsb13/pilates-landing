@@ -139,8 +139,16 @@ header { padding: 20px 0; background: var(--bg); }
 .about-image img { 
     width: 100%; 
     border-radius: 20px; 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+    
+    /* УБИРАЕМ ТЕНЬ, чтобы края были мягкими */
+    box-shadow: none; 
+    
     display: block; 
+    
+    /* МАГИЯ МАСКИ (Растушевка) */
+    /* Делаем картинку видимой в центре (черный) и прозрачной к краям */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
 }
 
 /* Список преимуществ с галочками */
@@ -179,7 +187,13 @@ header { padding: 20px 0; background: var(--bg); }
     object-fit: cover;
     height: 100%;
     min-height: 350px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    
+    /* УБИРАЕМ ТЕНЬ */
+    box-shadow: none;
+    
+    /* ТА ЖЕ МАСКА */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
 }
 
 .req-item {
@@ -387,6 +401,9 @@ header { padding: 20px 0; background: var(--bg); }
         height: auto;
         max-height: 400px;
         object-fit: cover;
+                /* На телефоне делаем края чуть четче (85%), чтобы было видно детали */
+        -webkit-mask-image: radial-gradient(ellipse at center, black 85%, transparent 100%);
+        mask-image: radial-gradient(ellipse at center, black 85%, transparent 100%);
     }
     .req-icon {
         width: 90px; /* Чуть меньше иконки на телефоне */
