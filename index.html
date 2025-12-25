@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     
     <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
-    <link rel="stylesheet" href="style.css?v=200">
+    <link rel="stylesheet" href="style.css?v=220">
     
     <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,24 +222,23 @@
         </div>
     </footer>
     
-<!-- NUCLEAR SMOOTH SCROLL SCRIPT -->
+<!-- OPTIMIZED MANUAL SCROLL (Cubic Easing) -->
     <script>
-        // Функция математического сглаживания (разгон и торможение)
-        function easeInOutQuad(t, b, c, d) {
+        // Новая формула: Cubic (более резкий разгон и торможение, быстрая середина)
+        function easeInOutCubic(t, b, c, d) {
             t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
         }
 
-        // Основная функция прокрутки
         function smoothScroll(target, duration) {
             var targetElement = document.querySelector(target);
             if (!targetElement) return;
 
-            // Вычисляем позицию. -50 нужно для отступа сверху (если есть шапка)
-            // Если шапка не фиксированная, можно убрать -50
-            var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset; 
+            // Вычисляем позицию
+            // -20 пикселей, чтобы заголовок не прилипал к самому верху экрана
+            var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 20; 
             var startPosition = window.pageYOffset;
             var distance = targetPosition - startPosition;
             var startTime = null;
@@ -248,28 +247,25 @@
                 if (startTime === null) startTime = currentTime;
                 var timeElapsed = currentTime - startTime;
                 
-                // Вычисляем следующий шаг
-                var run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                // Используем новую формулу Cubic
+                var run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
                 
-                // Двигаем экран
                 window.scrollTo(0, run);
 
-                // Если время не вышло, продолжаем двигать
                 if (timeElapsed < duration) requestAnimationFrame(animation);
             }
 
             requestAnimationFrame(animation);
         }
 
-        // Вешаем обработчик на все ссылки с решеткой #
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                // Запускаем прокрутку за 1000 мс (1 секунда)
-                smoothScroll(this.getAttribute('href'), 1000);
+                // Время уменьшено до 800мс (было 1000мс). 
+                // Это сделает анимацию более "сбитой" и уберет ощущение лага.
+                smoothScroll(this.getAttribute('href'), 800);
             });
         });
     </script>
-
 </body>
 </html>
