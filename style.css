@@ -14,11 +14,6 @@
     --text: #2C2C2C;         /* Основной цвет текста */
     --grey-text: #666666;    /* Цвет вспомогательного текста */
 }
-html, body {
-    scroll-behavior: smooth;
-    /* Важно для iOS: иногда помогает добавление этого свойства */
-    -webkit-overflow-scrolling: touch; 
-}
 /* --- ОБЩИЕ СТИЛИ ДЛЯ СТРАНИЦЫ --- */
 body {
     font-family: 'Inter', sans-serif; /* Шрифт */

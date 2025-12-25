@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     
     <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
-    <link rel="stylesheet" href="style.css?v=100">
+    <link rel="stylesheet" href="style.css?v=110">
     
     <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,7 +221,8 @@
             </div>
         </div>
     </footer>
-<!-- Скрипт для плавной прокрутки на всех устройствах -->
+    
+<!-- Скрипт для плавной прокрутки (Hard version) -->
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -231,8 +232,14 @@
                 const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
+                    // Вычисляем точную позицию элемента относительно верха страницы
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset;
+
+                    // Принудительно крутим окно
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
                     });
                 }
             });
