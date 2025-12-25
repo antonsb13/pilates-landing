@@ -14,7 +14,9 @@
     --text: #2C2C2C;         /* Основной цвет текста */
     --grey-text: #666666;    /* Цвет вспомогательного текста */
 }
-
+html {
+    scroll-behavior: smooth; /* Это делает прокрутку плавной */
+}
 /* --- ОБЩИЕ СТИЛИ ДЛЯ СТРАНИЦЫ --- */
 body {
     font-family: 'Inter', sans-serif; /* Шрифт */
@@ -51,7 +53,7 @@ header { padding: 20px 0; background: var(--bg); }
 
 .header-content { 
     display: flex; /* Выстраиваем лого и кнопку в ряд */
-    justify-content: space-between; /* Разносим их по краям */
+    justify-content: center; /* Разносим их по краям */
     align-items: center; /* Центрируем по вертикали */
 }
 
