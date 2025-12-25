@@ -191,10 +191,10 @@ header { padding: 20px 0; background: var(--bg); }
 
 /* Стиль для иконок-картинок */
 .req-icon {
-    width: 80px;  /* Размер иконки */
-    height: 80px;
+    width: 140px;  /* Размер иконки */
+    height: 140px;
     flex-shrink: 0;
-    margin-right: 25px; /* Отступ до текста */
+    margin-right: 15px; /* Отступ до текста */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -361,9 +361,9 @@ header { padding: 20px 0; background: var(--bg); }
         object-fit: cover;
     }
     .req-icon {
-        width: 60px; /* Чуть меньше иконки на телефоне */
-        height: 60px;
-        margin-right: 20px;
+        width: 90px; /* Чуть меньше иконки на телефоне */
+        height: 90px;
+        margin-right: 10px;
     }
     .req-item { align-items: flex-start; }
 
