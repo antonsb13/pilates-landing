@@ -1,84 +1,91 @@
-/* --- GLOBAL RESET --- */
+/* --- СБРОС СТАНДАРТНЫХ НАСТРОЕК БРАУЗЕРА --- */
 * {
+    /* Важно: заставляет считать ширину элемента ВКЛЮЧАЯ отступы и границы */
     box-sizing: border-box; 
 }
 
+/* --- ПЕРЕМЕННЫЕ (ЦВЕТА) --- */
+/* Меняйте цвета здесь, и они поменяются везде на сайте */
 :root {
-    --primary: #7A4B5F;
-    --primary-hover: #5E3A49;
-    --bg: #F5F5F7;
-    --card-bg: #FFFFFF;
-    --text: #2C2C2C;
-    --grey-text: #666666;
+    --primary: #7A4B5F;      /* Основной цвет (кнопки, заголовки) - сливовый */
+    --primary-hover: #5E3A49; /* Цвет кнопок при наведении (темнее) */
+    --bg: #F5F5F7;           /* Цвет фона сайта (светло-серый) */
+    --card-bg: #FFFFFF;      /* Цвет фона карточек (белый) */
+    --text: #2C2C2C;         /* Основной цвет текста */
+    --grey-text: #666666;    /* Цвет вспомогательного текста */
 }
 
+/* --- ОБЩИЕ СТИЛИ ДЛЯ СТРАНИЦЫ --- */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; /* Шрифт */
     margin: 0;
     padding: 0;
     background-color: var(--bg);
     color: var(--text);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    line-height: 1.6; /* Межстрочный интервал для читаемости */
+    -webkit-font-smoothing: antialiased; /* Сглаживание шрифтов на Mac */
+    overflow-x: hidden; /* Запрет горизонтальной прокрутки */
 }
 
+/* Заголовки (H1, H2, H3) используют красивый шрифт с засечками */
 h1, h2, h3 { 
     font-family: 'Playfair Display', serif; 
     margin-bottom: 1rem; 
     font-weight: 600;
 }
 
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; padding: 0; }
+a { text-decoration: none; color: inherit; } /* Убираем подчеркивание у ссылок */
+ul { list-style: none; padding: 0; } /* Убираем точки у списков */
 
-/* --- CONTAINER (ГЛАВНЫЙ БЛОК) --- */
+/* --- КОНТЕЙНЕР (ОГРАНИЧИТЕЛЬ ШИРИНЫ) --- */
 .container { 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    padding-left: 24px;  /* Эти отступы теперь будут работать */
-    padding-right: 24px;
+    max-width: 1100px; /* Максимальная ширина контента */
+    margin: 0 auto;    /* Центрирование по горизонтали */
+    padding-left: 24px;  /* Отступ слева (чтобы не прилипало к краю экрана) */
+    padding-right: 24px; /* Отступ справа */
     width: 100%;
 }
 
-/* --- HEADER --- */
+/* --- ШАПКА (HEADER) --- */
 header { padding: 20px 0; background: var(--bg); }
 
 .header-content { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    display: flex; /* Выстраиваем лого и кнопку в ряд */
+    justify-content: space-between; /* Разносим их по краям */
+    align-items: center; /* Центрируем по вертикали */
 }
 
 .logo { 
     font-weight: 700; 
     font-size: 1.1rem; 
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    letter-spacing: 1.5px; /* Разрядка букв */
+    text-transform: uppercase; /* Все буквы заглавные */
     color: var(--text);
 }
 
-/* --- BUTTONS --- */
+/* --- КНОПКИ --- */
+/* Основная кнопка (залитая цветом) */
 .btn-primary {
     background: var(--primary); 
     color: #fff;
     padding: 14px 32px; 
-    border-radius: 50px; 
-    transition: 0.3s; 
+    border-radius: 50px; /* Круглые края */
+    transition: 0.3s;    /* Плавная анимация при наведении */
     font-weight: 500;
     font-size: 1rem;
     display: inline-block;
     border: none;
     cursor: pointer;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(122, 75, 95, 0.2);
+    box-shadow: 0 4px 15px rgba(122, 75, 95, 0.2); /* Тень */
 }
 
 .btn-primary:hover { 
     background: var(--primary-hover); 
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Кнопка чуть всплывает */
 }
 
+/* Второстепенная кнопка (контурная) */
 .btn-outline {
     border: 1px solid var(--primary); 
     color: var(--primary);
@@ -86,15 +93,14 @@ header { padding: 20px 0; background: var(--bg); }
     border-radius: 50px; 
     display: block; 
     text-align: center; 
-    margin-top: auto; 
+    margin-top: auto; /* Прижимает кнопку к низу карточки */
     font-weight: 600;
     transition: 0.3s;
 }
 
 .btn-outline:hover { background: var(--primary); color: #fff; }
 
-/* --- HERO --- */
-/* ИСПРАВЛЕНО: задаем только верх/низ, чтобы не сбивать бока */
+/* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
 .hero { 
     padding-top: 60px; 
     padding-bottom: 80px; 
@@ -112,143 +118,50 @@ header { padding: 20px 0; background: var(--bg); }
     font-size: 1.25rem; 
     color: var(--grey-text); 
     margin-bottom: 40px; 
-    
-    /* Ограничиваем ширину, чтобы текст встал в 2 красивые строки */
-    max-width: 700px; 
-    
-    /* Центрируем блок с текстом */
+    max-width: 700px; /* Ограничиваем ширину текста для красоты */
     margin-left: auto;
     margin-right: auto;
 }
 
-/* --- ABOUT --- */
-/* ИСПРАВЛЕНО: задаем только верх/низ */
+/* --- БЛОК "О ТРЕНЕРЕ" (ABOUT) --- */
 .about { 
     padding-top: 80px; 
     padding-bottom: 80px; 
 }
 
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: block; }
+/* Сетка: текст слева, фото справа */
+.about-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* Две равные колонки */
+    gap: 60px; /* Расстояние между колонками */
+    align-items: center; 
+}
 
+.about-image img { 
+    width: 100%; 
+    border-radius: 20px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+    display: block; 
+}
+
+/* Список преимуществ с галочками */
 .benefits li { 
-    margin-bottom: 12px; font-size: 1.05rem; display: flex; align-items: flex-start; 
+    margin-bottom: 12px; 
+    font-size: 1.05rem; 
+    display: flex; 
+    align-items: flex-start; 
 }
 .benefits li:before {
-    content: "✓"; color: var(--primary); font-weight: bold; margin-right: 12px; font-size: 1.2rem; line-height: 1.4; flex-shrink: 0;
-}
-
-/* --- PRICING --- */
-/* ИСПРАВЛЕНО: задаем только верх/низ */
-.pricing { 
-    padding-top: 80px; 
-    padding-bottom: 80px; 
-    text-align: center; 
-}
-
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-
-/* --- КАРТОЧКА ТОВАРА --- */
-.card { 
-    background: var(--card-bg); 
-    padding: 40px 30px; /* Чуть уменьшил боковые отступы, чтобы текст влезал */
-    border-radius: 24px; 
-    text-align: left; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-    border: 1px solid rgba(0,0,0,0.03); 
-    transition: 0.3s;
-    
-    /* Flexbox для выравнивания */
-    display: flex; 
-    flex-direction: column; 
-    height: 100%; 
-}
-
-.card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
-
-/* 1. ЗАГОЛОВОК */
-.card h3 { 
-    font-size: 1.3rem; /* Уменьшили шрифт (было 1.5rem), теперь влезет в строку */
-    font-weight: 700;
-    margin-bottom: 15px;
-    
-    /* Фиксируем высоту заголовка. Даже если текст в 1 строку, место будет занято как под 2 (на всякий случай) */
-    min-height: 2.4rem; 
-    
-    display: flex; 
-    align-items: center; /* Центрируем текст по вертикали в своем блоке */
-}
-
-/* 2. ОПИСАНИЕ */
-.card .desc { 
-    font-size: 0.95rem; 
-    color: var(--grey-text); 
-    
-    /* Фиксируем высоту описания. Рассчитано примерно на 4 строки текста */
-    min-height: 90px; 
-    
-    margin-bottom: 0;
-}
-
-/* 3. ЦЕНА */
-.price { 
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin: 20px 0 30px; 
-    color: var(--primary);
-    
-    /* Фиксируем высоту блока цены, чтобы список буллетов начинался с одной линии */
-    min-height: 40px; 
-    display: flex;
-    align-items: center;
-}
-
-.price span { 
-    font-size: 1rem; 
-    font-weight: 400; 
-    color: var(--grey-text); 
-    margin-left: 5px;
-}
-
-/* 4. СПИСОК (БУЛЛЕТЫ) */
-.card ul { 
-    margin-bottom: 30px; 
-    flex-grow: 1; /* Список занимает всё свободное место и толкает кнопку вниз */
-}
-
-.card ul li { 
-    margin-bottom: 12px; 
-    font-size: 0.95rem; /* Чуть компактнее */
-    display: flex; 
-    align-items: flex-start;
-    line-height: 1.4;
-}
-
-.card ul li:before { 
-    content: "•"; 
+    content: "✓"; /* Галочка через CSS */
     color: var(--primary); 
-    margin-right: 10px; 
-    font-size: 1.5rem; 
-    line-height: 1; 
-    flex-shrink: 0; 
+    font-weight: bold; 
+    margin-right: 12px; 
+    font-size: 1.2rem; 
+    line-height: 1.4; 
+    flex-shrink: 0; /* Галочка не сплющивается */
 }
 
-/* КНОПКА */
-.btn-outline {
-    margin-top: auto; /* Прижимается к самому низу */
-    width: 100%;      /* На всякий случай растягиваем */
-    box-sizing: border-box;
-}
-
-/* --- FOOTER --- */
-.footer { background: #252525; color: #bbb; padding: 60px 0 30px; margin-top: 80px; font-size: 0.9rem; }
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
-.footer h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; }
-.footer a { display: block; margin-bottom: 10px; transition: 0.2s; }
-.footer a:hover { color: #fff; }
-.copyright { text-align: center; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem; }
-
-/* --- REQUIREMENTS SECTION (Для занятий) --- */
+/* --- БЛОК "ЧТО ПОТРЕБУЕТСЯ" (REQUIREMENTS) --- */
 .requirements {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -272,30 +185,16 @@ header { padding: 20px 0; background: var(--bg); }
 
 .req-item {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 30px;
-}
-
-.req-item:last-child { margin-bottom: 0; }
-
-/* --- ИКОНКИ ТРЕБОВАНИЙ --- */
-.req-item {
-    display: flex;
     align-items: center; /* Центрируем иконку и текст по вертикали */
-    margin-bottom: 40px; /* Чуть больше отступ между пунктами */
+    margin-bottom: 40px; /* Отступ между пунктами */
 }
 
+/* Стиль для иконок-картинок */
 .req-icon {
-    width: 150px;  /* УВЕЛИЧИЛ РАЗМЕР (было 45px) */
-    height: 150px;
+    width: 80px;  /* Размер иконки */
+    height: 80px;
     flex-shrink: 0;
-    margin-right: 15px; /* Больше отступ до текста */
-    
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-    
+    margin-right: 25px; /* Отступ до текста */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,128 +203,177 @@ header { padding: 20px 0; background: var(--bg); }
 .req-icon img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Картинка вписывается без обрезки */
     display: block;
 }
-.req-text {
-    font-size: 1rem;
-    color: var(--grey-text);
+
+.req-text { font-size: 1rem; color: var(--grey-text); }
+.req-text strong { display: block; color: var(--text); font-size: 1.1rem; margin-bottom: 4px; }
+
+/* --- ТАРИФЫ (PRICING) --- */
+.pricing { 
+    padding-top: 80px; 
+    padding-bottom: 80px; 
+    text-align: center; 
 }
 
-.req-text strong {
-    display: block;
-    color: var(--text);
-    font-size: 1.1rem;
-    margin-bottom: 4px;
+/* Сетка карточек: авто-заполнение, минимум 300px ширины */
+.cards { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    margin-top: 50px; 
 }
 
-/* --- SOCIAL ICONS (Соцсети) --- */
+/* Стиль одной карточки */
+.card { 
+    background: var(--card-bg); 
+    padding: 40px 30px; 
+    border-radius: 24px; 
+    text-align: left; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+    border: 1px solid rgba(0,0,0,0.03); 
+    transition: 0.3s;
+    
+    /* Flexbox, чтобы растянуть карточку и прижать кнопку к низу */
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+}
+
+.card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
+
+.card h3 { 
+    font-size: 1.3rem; 
+    font-weight: 700;
+    margin-bottom: 15px;
+    min-height: 2.4rem; /* Фикс высота заголовка для ровности */
+    display: flex; align-items: center;
+}
+
+.card .desc { 
+    font-size: 0.95rem; 
+    color: var(--grey-text); 
+    min-height: 90px; /* Фикс высота описания */
+    margin-bottom: 0;
+}
+
+.price { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin: 20px 0 30px; 
+    color: var(--primary);
+    min-height: 40px; 
+    display: flex; align-items: center;
+}
+.price span { font-size: 1rem; font-weight: 400; color: var(--grey-text); margin-left: 5px; }
+
+/* Список буллетов в карточке */
+.card ul { 
+    margin-bottom: 30px; 
+    flex-grow: 1; /* Занимает всё свободное место */
+}
+.card ul li { 
+    margin-bottom: 12px; 
+    font-size: 0.95rem; 
+    display: flex; align-items: flex-start; 
+}
+.card ul li:before { content: "•"; color: var(--primary); margin-right: 10px; font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+
+/* --- ПОДВАЛ (FOOTER) --- */
+.footer { background: #252525; color: #bbb; padding: 60px 0 30px; margin-top: 80px; font-size: 0.9rem; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+.footer h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; }
+.footer a { display: block; margin-bottom: 10px; transition: 0.2s; }
+.footer a:hover { color: #fff; }
+.copyright { text-align: center; border-top: 1px solid #333; padding-top: 30px; font-size: 0.8rem; }
+
+/* Соцсети (круглые иконки) */
 .social-links {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
 }
-
 .social-links a {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%; /* Круглые кнопки */
+    width: 44px; height: 44px;
+    border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     transition: 0.3s;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+.social-links a:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+.social-links svg { width: 22px; height: 22px; }
 
-.social-links a:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    transform: translateY(-3px);
-}
 
-.social-links svg {
-    width: 22px;
-    height: 22px;
-}
-
-/* --- MOBILE (ТЕЛЕФОНЫ) --- */
+/* --- АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА --- */
 @media (max-width: 768px) {
-    /* 1. На всякий случай дублируем отступы */
+    /* 1. Отступы контейнера на мобильных */
     .container {
         padding-left: 24px;
         padding-right: 24px;
     }
 
-    /* 2. Шапка */
+    /* 2. Шапка в столбик */
     .header-content {
         flex-direction: column;
         gap: 20px;
     }
     
-    /* 3. Кнопки на мобильном */
+    /* 3. Кнопка на всю ширину */
     .btn-primary {
         width: 100%;
         display: block;
     }
 
+    /* 4. Заголовки чуть меньше */
     .hero h1 { font-size: 2.5rem; }
     
-    /* Блоки О тренере */
+    /* 5. Блоки "О тренере" друг под другом */
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-image { order: -1; }
+    .about-image { order: -1; /* Фото сверху */ }
     
-    /* ИСПРАВЛЕНО: на мобильном тоже задаем только вертикальные отступы */
-    .hero, .about, .pricing { 
+    /* 6. Отступы секций меньше */
+    .hero, .about, .pricing, .requirements { 
         padding-top: 40px; 
         padding-bottom: 40px; 
     }
-        /* Заставляем подвал быть в 1 колонку и занимать всю ширину */
-    .footer-grid {
-        grid-template-columns: 1fr; /* Одна колонка на всю ширину */
-        gap: 30px; /* Чуть уменьшим расстояние между блоками по вертикали */
-    }
-    .footer-col p {
-        white-space: nowrap; /* Запрет переноса строк в абзацах подвала */
-    }
-    .footer-col p:last-child {
-        white-space: normal;
-    }
 
-    /* Исправление наложения (Flexbox метод) */
+    /* 7. Блок "Что потребуется" - картинка сверху */
     .req-grid {
-        display: flex;          /* Включаем Flex */
-        flex-direction: column; /* Элементы строго вертикально */
-        gap: 40px;              /* Расстояние между фото и списком */
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
     }
-    
     .req-image {
-        order: -1;        /* Переносим картинку наверх */
+        order: -1;
         width: 100%;
-        height: auto;     /* ВАЖНО: Высота автоматическая, по размеру картинки */
-        margin-bottom: 0; /* Отступ регулируется через gap выше */
+        height: auto;
+        margin-bottom: 0;
         display: block;
     }
-    
     .req-image img {
         width: 100%;
-        height: auto;     /* Картинка сохраняет пропорции */
-        display: block;
-        border-radius: 20px;
-        max-height: 400px; /* Ограничение, чтобы не была гигантской на планшетах */
+        height: auto;
+        max-height: 400px;
         object-fit: cover;
     }
-    
-    /* Иконки на мобильном чуть меньше, но все равно крупные */
     .req-icon {
-        width: 100px;
-        height: 100px;
-        margin-right: 10px;
+        width: 60px; /* Чуть меньше иконки на телефоне */
+        height: 60px;
+        margin-right: 20px;
     }
-    
-    .req-item {
-        align-items: flex-start; /* На телефоне лучше по верхнему краю, если текст длинный */
+    .req-item { align-items: flex-start; }
+
+    /* 8. Подвал в 1 колонку */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
+    /* Запрет переноса строк для телефонов и ИИН */
+    .footer-col p { white-space: nowrap; }
+    /* Разрешаем перенос только для адреса (последний элемент) */
+    .footer-col p:last-child { white-space: normal; }
 }

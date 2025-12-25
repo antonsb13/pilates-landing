@@ -1,75 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Мета-теги для правильного отображения кириллицы и масштаба на мобильных -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Заголовок, который виден во вкладке браузера -->
     <title>Borodina.Pilates — Онлайн-студия пилатеса</title>
-    <!-- Основная иконка для вкладки браузера -->
+    
+    <!-- Иконка сайта (фавикон) для браузера и закладок -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     
-    <!-- Иконка для iPhone (если добавят сайт на главный экран) -->
+    <!-- Иконка для iPhone (если добавить сайт на домашний экран) -->
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="stylesheet" href="style.css?v=60">
+    
+    <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
+    <link rel="stylesheet" href="style.css?v=80">
+    
+    <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-</head>ы
+</head>
 <body>
 
+    <!-- ШАПКА САЙТА (Header) -->
     <header>
         <div class="container header-content">
+            <!-- Логотип (текстовый) -->
             <div class="logo">BORODINA.PILATES</div>
+            
+            <!-- Кнопка в шапке -->
             <a href="https://t.me/borodina_pilates_bot" class="btn-primary">Перейти в бота</a>
         </div>
     </header>
 
+    <!-- ГЛАВНЫЙ БЛОК (Hero Section) -->
     <section class="hero">
         <div class="container">
+            <!-- Главный заголовок (H1) -->
             <h1>Верни легкость<br>своему телу</h1>
+            
+            <!-- Подзаголовок -->
             <p>Авторский курс восстановления осанки и укрепления спины.<br>Занимайся дома в удобном формате через Telegram.</p>
+            
+            <!-- Главная кнопка призыва к действию -->
             <a href="https://t.me/borodina_pilates_bot" class="btn-primary">Начать тренировки</a>
         </div>
     </section>
 
+    <!-- БЛОК "О ТРЕНЕРЕ" -->
     <section class="about container">
         <div class="about-grid">
+            <!-- Текстовая часть -->
             <div class="about-text">
                 <h2>О тренере</h2>
                 <p><strong>Бородина Анастасия</strong> — сертифицированный тренер по пилатесу от школы PoleStar Pilates</p>
                 <p>Моя методика основана на бережном отношении к телу. Без изнуряющих кардио и тяжелых весов. Мы работаем с глубокими мышцами, дыханием и осознанностью.</p>
+                
+                <!-- Список преимуществ (с галочками) -->
                 <ul class="benefits">
                     <li>Сертификат PoleStar Pilates</li>
                     <li>Более 3 лет практики</li>
                     <li>100+ довольных учеников</li>
                 </ul>
             </div>
+            
+            <!-- Фото тренера -->
             <div class="about-image">
-                <!-- Замените на свое фото. Имя файла должно совпадать -->
                 <img src="images/trainer.jpg" alt="Тренер пилатес Бородина">
             </div>
         </div>
     </section>
 
-<!-- БЛОК: ЧТО ПОТРЕБУЕТСЯ -->
+    <!-- БЛОК "ЧТО ПОТРЕБУЕТСЯ" (Requirements) -->
     <section class="requirements container">
         <h2>Для занятий потребуется</h2>
         
         <div class="req-grid">
-            <!-- Большая картинка -->
+            <!-- Большая картинка слева (на мобильном будет сверху) -->
             <div class="req-image">
                 <img src="images/setup.jpg" alt="Обстановка для пилатеса">
             </div>
 
-            <!-- Список -->
+            <!-- Список требований справа -->
             <div class="req-list">
                 
                 <!-- Пункт 1 -->
                 <div class="req-item">
                     <div class="req-icon">
-                        <!-- Замените имя файла на свое -->
+                        <!-- Иконка (должна лежать в папке images) -->
                         <img src="images/icon-1.png" alt="Гаджет">
                     </div>
                     <div class="req-text">
-                        ДОСТУП В ИНТЕРНЕТ И УСТРОЙСТВО, НА КОТОРОМ УДОБНО ЗАНИМАТЬСЯ: СМАРТФОН, ПЛАНШЕТ ИЛИ НОУТБУК
+                        <strong>Доступ в интернет и гаджет</strong>
+                        Устройство, на котором удобно смотреть видео: смартфон, планшет или ноутбук.
                     </div>
                 </div>
 
@@ -99,10 +123,12 @@
         </div>
     </section>
 
+    <!-- БЛОК "ТАРИФЫ" (Pricing) -->
     <section class="pricing container">
         <h2>Программы обучения</h2>
         <div class="cards">
-            <!-- Карточка 1 -->
+            
+            <!-- Карточка 1: Начальный -->
             <div class="card">
                 <h3>Начальный уровень</h3>
                 <p class="desc">Идеально для старта. Базовые принципы дыхания, снятие боли в спине.</p>
@@ -115,7 +141,7 @@
                 <a href="https://t.me/borodina_pilates_bot" class="btn-outline">Выбрать</a>
             </div>
 
-            <!-- Карточка 2 -->
+            <!-- Карточка 2: Средний -->
             <div class="card">
                 <h3>Средний уровень</h3>
                 <p class="desc">Баланс силы и гибкости. Подключаем более сложные движения и координацию.</p>
@@ -128,7 +154,7 @@
                 <a href="https://t.me/borodina_pilates_bot" class="btn-outline">Выбрать</a>
             </div>
 
-            <!-- Карточка 3 -->
+            <!-- Карточка 3: Продвинутый -->
             <div class="card">
                 <h3>Продвинутый уровень</h3>
                 <p class="desc">Для тех, кто готов к усложненной хореографии и работе с оборудованием.</p>
@@ -143,37 +169,52 @@
         </div>
     </section>
 
+    <!-- ПОДВАЛ (Footer) -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
+                
+                <!-- Колонка 1: Документы -->
                 <div class="footer-col">
                     <h4>Документы</h4>
-                    <!-- Загрузите PDF файлы в папку docs или дайте ссылку на Google Docs -->
+                    <!-- target="_blank" открывает документ в новой вкладке -->
                     <a href="docs/offer.pdf" target="_blank">Публичная оферта</a>
                     <a href="docs/privacy.pdf" target="_blank">Политика конфиденциальности</a>
                 </div>
+                
+                <!-- Колонка 2: Реквизиты -->
                 <div class="footer-col">
                     <h4>Реквизиты</h4>
                     <p>ИП "B.Motion"</p>
+                    <!-- &nbsp; - неразрывный пробел, чтобы цифры не переносились на новую строку -->
                     <p>ИИН:&nbsp;911012050421</p>
                     <p>Казахстан, г. Алматы, Гагарина 133/1</p>
                 </div>
+                
+                <!-- Колонка 3: Контакты -->
                 <div class="footer-col">
                     <h4>Контакты</h4>
                     <p>Email: support@borodin.live</p>
                     <p>Тел:&nbsp;+7&nbsp;777&nbsp;027&nbsp;97&nbsp;17</p>
                 </div>
             </div>
+            
+            <!-- Иконки соцсетей -->
             <div class="social-links">
-                <!-- Instagram -->
+                <!-- Ссылка на Instagram -->
                 <a href="https://instagram.com/borodina.pilates" target="_blank" aria-label="Instagram">
+                    <!-- SVG код иконки Инстаграм -->
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 2H7C4.23858 2 2 4.23858 2 7V17C2 19.7614 4.23858 22 7 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37C16.1234 12.2022 15.9813 13.0522 15.5938 13.799C15.2063 14.5458 14.5931 15.1514 13.8416 15.5297C13.0901 15.9079 12.2384 16.0396 11.4078 15.9059C10.5771 15.7723 9.80976 15.3801 9.21484 14.7852C8.61991 14.1902 8.22773 13.4229 8.09406 12.5922C7.9604 11.7616 8.09206 10.9099 8.47032 10.1584C8.84858 9.40685 9.45418 8.79374 10.201 8.40624C10.9478 8.01874 11.7978 7.87658 12.63 8C13.5205 8.08779 14.352 8.48911 14.978 9.13322C15.6041 9.77732 15.985 10.623 16 11.37Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5H17.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
-                <!-- YouTube -->
+                
+                <!-- Ссылка на YouTube -->
                 <a href="https://youtube.com/@Borodina.pilates" target="_blank" aria-label="YouTube">
+                    <!-- SVG код иконки YouTube -->
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 12L10 14.5V9.5L14 12Z" fill="currentColor"/><path d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
             </div>
+            
+            <!-- Копирайт -->
             <div class="copyright">
                 © 2026 Borodina.Pilates. Все права защищены.
             </div>
