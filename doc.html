@@ -80,6 +80,23 @@
             margin-top: 20px;
             display: inline-block;
         }
+        
+        /* --- ИСПРАВЛЕНИЕ ШАПКИ НА ТЕЛЕФОНЕ --- */
+        @media (max-width: 600px) {
+            .doc-header {
+                flex-direction: column;  /* Элементы встают в столбик */
+                align-items: flex-start; /* Прижимаем всё к левому краю */
+                gap: 15px;               /* Отступ между кнопкой и заголовком */
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            .doc-title {
+                text-align: left;        /* Текст выравниваем по левому краю */
+                font-size: 1.2rem;       /* Чуть увеличим для красоты */
+                line-height: 1.3;        /* Чтобы длинные названия не слипались */
+            }
+        }
     </style>
 </head>
 <body>
@@ -103,7 +120,7 @@
             <div id="mobileFallback" class="mobile-fallback">
                 <h3>Просмотр документа</h3>
                 <p>Ваше устройство не поддерживает встроенный просмотр PDF.</p>
-                <a id="downloadBtn" href="#" class="btn-download" target="_blank">Скачать файл</a>
+                <a id="downloadBtn" href="#" class="btn-download" target="_blank">Открыть документ</a>
             </div>
         </div>
     </div>
