@@ -15,11 +15,33 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     
     <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
-    <link rel="stylesheet" href="style.css?v=250">
+    <link rel="stylesheet" href="style.css?v=260">
     
     <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    
+    <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+        // Игнорируем ошибки расширений браузера и мелочи
+        if (!message || message.includes('Script error')) return;
+
+        const errorData = {
+            message: message,
+            source: source,
+            line: lineno,
+            user_agent: navigator.userAgent
+        };
+
+        // Шлем на ТОТ ЖЕ вебхук, но на другой путь, например /webhook/js-error
+        fetch('https://n8n.borodin.live/webhook/js-error', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(errorData)
+        });
+     };
+     </script> 
+    
 </head>
 <body>
 
@@ -267,5 +289,31 @@
             });
         });
     </script>
+    
+    <script>
+    // --- N8N SPY PIXEL ---
+    (function() {
+        const webhookUrl = 'https://n8n.borodin.live/webhook-test/analytics';
+        
+        const data = {
+            page: window.location.pathname,
+            referrer: document.referrer, // Откуда пришел (например, instagram)
+            user_agent: navigator.userAgent, // Браузер и устройство
+            screen_width: window.screen.width,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+
+        // Отправляем данные "в фоне", даже если вкладку закроют
+        try {
+            // Используем fetch с keepalive для надежности
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+                keepalive: true
+            }).catch(e => console.error('Analytics error', e));
+        } catch (e) {}
+    })();
+</script>
 </body>
 </html>
