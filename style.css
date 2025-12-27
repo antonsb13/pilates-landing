@@ -136,14 +136,42 @@ header { padding: 20px 0; background: var(--bg); }
     align-items: center; 
 }
 
-.about-image img { 
+/* 2. Сброс стилей для самих картинок */
+.about-image img, .req-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0; /* Убираем, так как скругление уже есть у родителя */
+    box-shadow: none; /* Убираем, тень есть у родителя */
+    display: block;
+    
+    /* Добавляем легкую сепию, чтобы сама фото стала "теплее" */
+    /* Это сделает серый фон более бежевым */
+    filter: sepia(15%) contrast(105%);
+}
+
+/* 3. Цветная тонировка (Color Grading) */
+.about-image::after, .req-image::after {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0; 
     width: 100%; 
-    border-radius: 20px; 
+    height: 100%;
     
-    /* Вернули тень вместо маски */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+    /* Ваш фирменный цвет (#7A4B5F) */
+    background-color: var(--primary);
     
-    display: block; 
+    /* РЕЖИМ НАЛОЖЕНИЯ */
+    /* 'soft-light' или 'overlay' мягко подкрашивают фото */
+    /* 'multiply' делает фото темнее и насыщеннее цветом */
+    mix-blend-mode: soft-light; 
+    
+    /* СИЛА ЭФФЕКТА (0.1 = 10%, 0.5 = 50%) */
+    /* Поиграйте с этим значением, если слишком ярко или бледно */
+    opacity: 0.3; 
+    
+    pointer-events: none; /* Чтобы слой не мешал кликам (на всякий случай) */
 }
 
 /* Список преимуществ с галочками */
@@ -161,6 +189,15 @@ header { padding: 20px 0; background: var(--bg); }
     font-size: 1.2rem; 
     line-height: 1.4; 
     flex-shrink: 0; /* Галочка не сплющивается */
+}
+/* 1. Настройка контейнеров для картинок */
+.about-image, .req-image {
+    position: relative;   /* Обязательно для позиционирования слоя */
+    z-index: 1;
+    border-radius: 20px;  /* Скругление переносим сюда */
+    overflow: hidden;     /* Обрезаем цветной слой по форме скругления */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Тень тоже здесь */
+    line-height: 0;       /* Убирает возможные отступы снизу */
 }
 
 /* --- БЛОК "ЧТО ПОТРЕБУЕТСЯ" (REQUIREMENTS) --- */
@@ -487,7 +524,7 @@ header { padding: 20px 0; background: var(--bg); }
         margin-bottom: 0;
         display: block;
     }
-.req-image img {
+    .req-image img {
         width: 100%;
         height: auto;     
         max-height: 400px;
