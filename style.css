@@ -139,24 +139,11 @@ header { padding: 20px 0; background: var(--bg); }
 .about-image img { 
     width: 100%; 
     border-radius: 20px; 
-    box-shadow: none; /* Тень убираем */
+    
+    /* Вернули тень вместо маски */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+    
     display: block; 
-    
-    /* --- НОВАЯ МАСКА (ПРЯМОУГОЛЬНАЯ) --- */
-    
-    /* 1. Определяем два градиента: Вертикальный и Горизонтальный */
-    /* transparent -> black (видно) -> transparent */
-    /* 5% по краям - это зона размытия. Хотите больше мыла? Ставьте 10% или 15% */
-    --mask-vert: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-    --mask-horiz: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-
-    /* 2. Применяем оба градиента сразу */
-    -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
-    mask-image: var(--mask-vert), var(--mask-horiz);
-
-    /* 3. Магия: показываем только то место, где оба градиента пересекаются (черные) */
-    -webkit-mask-composite: source-in; /* Для Chrome/Safari/iOS */
-    mask-composite: intersect;         /* Стандарт для Firefox */
 }
 
 /* Список преимуществ с галочками */
@@ -196,17 +183,8 @@ header { padding: 20px 0; background: var(--bg); }
     height: 100%;
     min-height: 350px;
     
-    box-shadow: none;
-    
-    /* --- ТА ЖЕ ПРЯМОУГОЛЬНАЯ МАСКА --- */
-    --mask-vert: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-    --mask-horiz: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-
-    -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
-    mask-image: var(--mask-vert), var(--mask-horiz);
-
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
+    /* Вернули тень вместо маски */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
 .req-item {
@@ -409,21 +387,12 @@ header { padding: 20px 0; background: var(--bg); }
         margin-bottom: 0;
         display: block;
     }
-    .req-image img {
+.req-image img {
         width: 100%;
         height: auto;     
         max-height: 400px;
         object-fit: cover;
-        
-        /* На телефоне делаем размытие совсем тонким (3%), чтобы не съесть картинку */
-        --mask-vert: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
-        --mask-horiz: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
-
-        -webkit-mask-image: var(--mask-vert), var(--mask-horiz);
-        mask-image: var(--mask-vert), var(--mask-horiz);
-        
-        -webkit-mask-composite: source-in;
-        mask-composite: intersect;
+        /* Маски удалены, больше ничего писать не нужно */
     }
     .req-icon {
         width: 90px; /* Чуть меньше иконки на телефоне */
