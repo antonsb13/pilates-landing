@@ -340,6 +340,106 @@ header { padding: 20px 0; background: var(--bg); }
     background: linear-gradient(135deg, #0044BB 0%, #0088FF 100%);
 }
 
+/* --- БЛОК "ДЛЯ КОГО" --- */
+.for-whom {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.feature-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    opacity: 0.3; /* Полупрозрачный номер */
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif; /* Здесь лучше гротеск */
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--grey-text);
+    line-height: 1.5;
+}
+
+
+/* --- FAQ (ВОПРОСЫ) --- */
+.faq {
+    padding-top: 80px;
+    padding-bottom: 100px;
+    max-width: 800px; /* Делаем FAQ чуть уже основного контейнера для красоты */
+    margin: 0 auto;   /* Центрируем */
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    transition: 0.3s;
+}
+
+.accordion-btn:hover {
+    color: var(--primary);
+}
+
+.accordion-btn .icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 300;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p {
+    padding-bottom: 20px;
+    color: var(--grey-text);
+    font-size: 1rem;
+    margin: 0;
+}
+
 
 /* --- АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА --- */
 @media (max-width: 768px) {
@@ -410,4 +510,12 @@ header { padding: 20px 0; background: var(--bg); }
     .footer-col p { white-space: nowrap; }
     /* Разрешаем перенос только для адреса (последний элемент) */
     .footer-col p:last-child { white-space: normal; }
+    
+    .faq {
+        padding-top: 40px;
+        padding-bottom: 60px;
+    }
+    .accordion-btn {
+        font-size: 1rem; /* Чуть меньше шрифт вопроса на телефоне */
+    }
 }

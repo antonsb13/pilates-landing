@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     
     <!-- Подключение файла со стилями. ?v=80 нужно менять, чтобы сбросить кэш у пользователей после обновлений -->
-    <link rel="stylesheet" href="style.css?v=270">
+    <link rel="stylesheet" href="style.css?v=280">
     
     <!-- Подключение шрифтов от Google (Inter и Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,6 +87,33 @@
             <!-- Фото тренера -->
             <div class="about-image">
                 <img src="images/trainer.jpg" alt="Тренер пилатес Бородина">
+            </div>
+        </div>
+    </section>
+    
+    <!-- БЛОК: ДЛЯ КОГО ЭТОТ КУРС -->
+    <section class="for-whom container">
+        <h2>Этот курс для тебя, если:</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-num">01</div>
+                <h3>Беспокоит спина</h3>
+                <p>Чувствуешь напряжение в пояснице или шее после рабочего дня за компьютером.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">02</div>
+                <h3>Хочешь подтянутое тело</h3>
+                <p>Мечтаешь о красивом рельефе и упругости без изнуряющих тренировок в зале.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">03</div>
+                <h3>Мало времени</h3>
+                <p>Можешь выделить на себя всего 20-30 минут в день, не выходя из дома.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">04</div>
+                <h3>Не хватает энергии</h3>
+                <p>Хочешь чувствовать легкость в теле и прилив сил, а не усталость после тренировки.</p>
             </div>
         </div>
     </section>
@@ -185,6 +212,54 @@
                 </ul>
                 <a href="https://t.me/borodina_pilates_bot" class="btn-outline">Выбрать</a>
             </div>
+        </div>
+    </section>
+    
+    <!-- БЛОК: FAQ -->
+    <section class="faq container">
+        <h2>Частые вопросы</h2>
+        <div class="accordion">
+            
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    Как проходят занятия?
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Все уроки записаны в высоком качестве. Вы получаете доступ к закрытому Telegram-каналу, где видео структурированы. Вы можете заниматься в любое удобное время.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    Нужна ли подготовка?
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Нет, курс "Начальный уровень" подходит абсолютно всем, даже если вы никогда не занимались спортом. Мы начинаем с самых азов.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    Можно ли вернуть деньги?
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Так как это цифровой контент, возврат не предусмотрен после предоставления доступа. Но если у вас возникли технические проблемы, напишите в поддержку — мы поможем.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    Как оплатить из другой страны?
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Бот принимает карты Казахстана, РФ и международные карты. Просто выберите нужную валюту при оплате.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -315,5 +390,27 @@
         } catch (e) {}
     })();
 </script>
+
+<!-- Скрипт для FAQ -->
+    <script>
+        document.querySelectorAll('.accordion-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.icon');
+                
+                // Закрываем другие, если хотим (опционально, сейчас оставил открытие всех)
+                button.classList.toggle('active');
+                
+                if (button.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = "−";
+                } else {
+                    content.style.maxHeight = 0;
+                    icon.textContent = "+";
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
