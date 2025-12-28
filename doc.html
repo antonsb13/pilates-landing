@@ -130,8 +130,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('name'); // 'offer' или 'privacy'
         
-        // Формируем путь к файлу
-        const filePath = `docs/${fileName}.pdf`;
+        // Добавляем ?v=... чтобы сбросить кэш у клиентов
+        const filePath = `docs/${fileName}.pdf?v=${new Date().getTime()}`;
 
         // 2. Настраиваем заголовки
         const titleEl = document.getElementById('docTitle');
