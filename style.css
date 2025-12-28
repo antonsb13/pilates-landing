@@ -372,9 +372,11 @@ header { padding: 20px 0; background: var(--bg); }
     background: #FF0000;
 }
 
-/* 3. RUTUBE (Синий градиент) */
+/* 3. RUTUBE (Официальный темный стиль) */
 .icon-rutube {
-    background: linear-gradient(135deg, #0044BB 0%, #0088FF 100%);
+    background: #151515;
+    /* Можно добавить тонкую рамку, если на темном фоне сайта теряется */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
 }
 
 /* --- БЛОК "ДЛЯ КОГО" --- */
