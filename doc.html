@@ -137,6 +137,7 @@
         const titleEl = document.getElementById('docTitle');
         if (fileName === 'offer') titleEl.textContent = 'Публичная оферта';
         else if (fileName === 'privacy') titleEl.textContent = 'Политика конфиденциальности';
+        else if (fileName === 'consent') titleEl.textContent = 'Согласие на сбор данных'; // <-- ДОБАВИЛИ про сбор персональных данных
         else titleEl.textContent = 'Документ';
 
         // 3. Пытаемся отобразить PDF
