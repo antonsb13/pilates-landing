@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Юридическая информация — Borodina.Pilates</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <!-- Подключаем ваши стили -->
-    <link rel="stylesheet" href="style.css?v=500">
+    <link rel="stylesheet" href="style.css?v=600">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     
     <style>
-        /* Дополнительные стили специально для этого меню */
         body {
             background-color: #F5F5F7;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            padding: 20px;
         }
         .legal-card {
             background: #fff;
@@ -24,66 +23,47 @@
             border-radius: 24px;
             max-width: 500px;
             width: 100%;
-            margin: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
-        .legal-header {
-            text-align: center;
-            margin-bottom: 30px;
+        .legal-header { text-align: center; margin-bottom: 30px; }
+        .legal-header h1 { font-size: 1.8rem; color: var(--text); margin-bottom: 10px; }
+        .legal-header p { color: var(--grey-text); font-size: 0.95rem; }
+        
+        .legal-list { display: flex; flex-direction: column; gap: 15px; }
+        
+        .doc-link {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 20px; background: #F9F9F9; border-radius: 12px;
+            text-decoration: none; color: var(--text); font-weight: 500;
+            transition: 0.2s; border: 1px solid transparent;
         }
-        .legal-header h1 {
-            font-size: 1.8rem;
-            color: var(--text);
-            margin-bottom: 10px;
-        }
-        .legal-header p {
-            color: var(--grey-text);
-            font-size: 0.95rem;
+        .doc-link:hover {
+            background: #fff; border-color: var(--primary); color: var(--primary);
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         
-        .legal-list {
+        /* Блок нижних кнопок */
+        .legal-footer {
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             gap: 15px;
+            text-align: center;
         }
         
-        /* Кнопки документов */
-        .doc-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            background: #F9F9F9;
+        .btn-bot {
+            background-color: #3390ec; /* Цвет Телеграма */
+            color: #fff;
+            padding: 12px;
             border-radius: 12px;
             text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: 0.2s;
-            border: 1px solid transparent;
-        }
-        
-        .doc-link:hover {
-            background: #fff;
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        
-        .doc-icon {
-            display: flex;
-            align-items: center;
-            color: var(--primary);
-        }
-        
-        .back-home {
+            font-weight: 600;
             display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: var(--grey-text);
-            font-size: 0.9rem;
-            text-decoration: underline;
+            transition: 0.2s;
         }
+        .btn-bot:hover { background-color: #287bb5; }
+
+        .back-home { color: var(--grey-text); font-size: 0.9rem; text-decoration: underline; }
         .back-home:hover { color: var(--primary); }
     </style>
 </head>
@@ -96,26 +76,30 @@
         </div>
 
         <div class="legal-list">
-            <!-- 1. Политика (Самое важное для Телеграм) -->
-            <a href="doc.html?file=privacy" class="doc-link">
+            <!-- Добавили &from=legal к ссылкам -->
+            <a href="doc.html?file=privacy&from=legal" class="doc-link">
                 <span>Политика конфиденциальности</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18L15 12L9 6"/></svg>
             </a>
 
-            <!-- 2. Оферта -->
-            <a href="doc.html?file=offer" class="doc-link">
+            <a href="doc.html?file=offer&from=legal" class="doc-link">
                 <span>Договор публичной оферты</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18L15 12L9 6"/></svg>
             </a>
 
-            <!-- 3. Согласие -->
-            <a href="doc.html?file=consent" class="doc-link">
+            <a href="doc.html?file=consent&from=legal" class="doc-link">
                 <span>Согласие на обработку персональных данных</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18L15 12L9 6"/></svg>
             </a>
         </div>
 
-        <a href="index.html" class="back-home">Вернуться на главную</a>
+        <div class="legal-footer">
+            <!-- Кнопка возврата в бота -->
+            <a href="https://t.me/borodina_pilates_bot" class="btn-bot">Вернуться в бота</a>
+            
+            <!-- Ссылка на сайт -->
+            <a href="index.html" class="back-home">Перейти на сайт</a>
+        </div>
     </div>
 
 </body>
