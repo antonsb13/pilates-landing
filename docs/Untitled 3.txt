@@ -1,0 +1,2 @@
+            <!-- Ссылка на сайт -->
+            <a href="index.html" class="back-home">Перейти на сайт</a>
