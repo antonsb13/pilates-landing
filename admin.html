@@ -32,8 +32,20 @@
         th { text-align: left; color: #8b949e; padding-bottom: 10px; border-bottom: 1px solid #30363d; }
         td { padding: 10px 0; border-bottom: 1px solid #21262d; }
         
-        .danger { color: #f85149; font-weight: bold; }
-        .ok { color: #238636; }
+        .danger { 
+        color: #ff4444 !important; /* Ярко-красный */
+        font-weight: bold;
+        }
+        
+        .warning { 
+        color: #ffbb33 !important; /* Ярко-желтый/Оранжевый */
+        font-weight: bold;
+        }
+        
+        .ok { 
+        color: #00C851 !important; /* Ярко-зеленый */
+        font-weight: bold;
+        }
         
         /* Refresh Button */
         .btn-refresh {
@@ -41,8 +53,6 @@
             border-radius: 6px; cursor: pointer; font-family: inherit; margin-top: 30px; width: 100%;
         }
         .btn-refresh:hover { background: #388bfd;
-        .warning { color: #ffab00; } /* Желтый цвет для 'не дошедших' */
-         }
     </style>
 </head>
 <body>
@@ -123,7 +133,6 @@
             document.getElementById('banned-val').innerText = data.security.banned;
 
             // 4. Детектор зайцев (Таблица)
-            // 4. Детектор зайцев (Таблица)
             const ghostData = data.ghosts;
             const levels = ['beginner', 'intermediate', 'advance'];
             const names = {'beginner': 'Начальный', 'intermediate': 'Средний', 'advance': 'Продвинутый'};
@@ -138,30 +147,34 @@
                 let statusText = '';
                 
                 if (row.diff > 0) {
-                    // Людей больше, чем оплат -> ЗАЙЦЫ
-                    statusClass = 'danger'; // Красный
-                    statusText = `🚨 +${row.diff} (Лишние)`;
+                    // Людей больше, чем оплат
+                    statusClass = 'danger'; 
+                    statusText = `🚨 +${row.diff} (Зайцы!)`;
                 } else if (row.diff < 0) {
-                    // Людей меньше, чем оплат -> КТО-ТО НЕ ВСТУПИЛ
-                    statusClass = 'warning'; // Желтый (надо добавить в CSS)
+                    // Людей меньше, чем оплат
+                    statusClass = 'warning'; 
                     statusText = `💤 ${row.diff} (Не дошли)`;
                 } else {
-                    // Идеально ровно
-                    statusClass = 'ok'; // Зеленый
+                    // Идеально
+                    statusClass = 'ok'; 
                     statusText = '✅ OK';
                 }
 
-                // В колонке "Факт" показываем: "5 (3 чел)" - общее и реальное
+                // ВАЖНОЕ ИЗМЕНЕНИЕ НИЖЕ:
+                // В 3-й колонке показываем только row.real_humans (без ботов)
                 html += `
                     <tr>
                         <td>${names[lvl]}</td>
                         <td>${row.db}</td>
-                        <td title="Всего: ${row.tg}, Технических: ${row.tg - row.real_humans}">${row.tg} (${row.real_humans} чел)</td>
+                        <td title="Всего в канале: ${row.tg} (из них ${row.tg - row.real_humans} ботов)">
+                            ${row.real_humans}
+                        </td>
                         <td class="${statusClass}">${statusText}</td>
                     </tr>
                 `;
             });
             document.getElementById('ghost-table').innerHTML = html;
+            
             // Статус
             document.getElementById('system-status').innerText = 'ONLINE';
             document.getElementById('system-status').style.background = '#238636';
