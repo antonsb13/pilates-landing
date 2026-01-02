@@ -40,7 +40,9 @@
             background: #1f6feb; color: white; border: none; padding: 10px 20px; 
             border-radius: 6px; cursor: pointer; font-family: inherit; margin-top: 30px; width: 100%;
         }
-        .btn-refresh:hover { background: #388bfd; }
+        .btn-refresh:hover { background: #388bfd;
+        .warning { color: #ffab00; } /* Желтый цвет для 'не дошедших' */
+         }
     </style>
 </head>
 <body>
@@ -121,6 +123,7 @@
             document.getElementById('banned-val').innerText = data.security.banned;
 
             // 4. Детектор зайцев (Таблица)
+            // 4. Детектор зайцев (Таблица)
             const ghostData = data.ghosts;
             const levels = ['beginner', 'intermediate', 'advance'];
             const names = {'beginner': 'Начальный', 'intermediate': 'Средний', 'advance': 'Продвинутый'};
@@ -129,21 +132,36 @@
             
             levels.forEach(lvl => {
                 const row = ghostData[lvl];
-                // Если разница > 0, значит в канале больше людей, чем в базе = ЗАЙЦЫ
-                const diffClass = row.diff > 0 ? 'danger' : 'ok';
-                const diffText = row.diff > 0 ? `+${row.diff} (Зайцы!)` : 'OK';
+                
+                // Логика статусов
+                let statusClass = '';
+                let statusText = '';
+                
+                if (row.diff > 0) {
+                    // Людей больше, чем оплат -> ЗАЙЦЫ
+                    statusClass = 'danger'; // Красный
+                    statusText = `🚨 +${row.diff} (Лишние)`;
+                } else if (row.diff < 0) {
+                    // Людей меньше, чем оплат -> КТО-ТО НЕ ВСТУПИЛ
+                    statusClass = 'warning'; // Желтый (надо добавить в CSS)
+                    statusText = `💤 ${row.diff} (Не дошли)`;
+                } else {
+                    // Идеально ровно
+                    statusClass = 'ok'; // Зеленый
+                    statusText = '✅ OK';
+                }
 
+                // В колонке "Факт" показываем: "5 (3 чел)" - общее и реальное
                 html += `
                     <tr>
                         <td>${names[lvl]}</td>
                         <td>${row.db}</td>
-                        <td>${row.tg}</td>
-                        <td class="${diffClass}">${diffText}</td>
+                        <td title="Всего: ${row.tg}, Технических: ${row.tg - row.real_humans}">${row.tg} (${row.real_humans} чел)</td>
+                        <td class="${statusClass}">${statusText}</td>
                     </tr>
                 `;
             });
             document.getElementById('ghost-table').innerHTML = html;
-
             // Статус
             document.getElementById('system-status').innerText = 'ONLINE';
             document.getElementById('system-status').style.background = '#238636';
