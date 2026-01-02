@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Borodina.Pilates</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #111; color: #0f0; font-family: 'JetBrains Mono', monospace; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #222; border: 1px solid #333; padding: 20px; border-radius: 8px; }
+        h1, h2 { color: #fff; margin-top: 0; }
+        .big-num { font-size: 3em; font-weight: bold; color: #fff; }
+        .label { color: #888; font-size: 0.9em; }
+        .alert { color: #ff3b30; }
+        .good { color: #34c759; }
+        
+        /* Таблица */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; color: #666; border-bottom: 1px solid #333; padding: 5px; }
+        td { padding: 8px 5px; border-bottom: 1px solid #222; color: #ddd; }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Mission Control Center</h1>
+    <div id="loading">Загрузка данных...</div>
+
+    <div class="grid" id="dashboard" style="display:none;">
+        
+        <!-- Блок 1: Подписки -->
+        <div class="card">
+            <h2>👥 Подписки</h2>
+            <div class="big-num" id="active-subs">-</div>
+            <div class="label">Активных клиентов</div>
+            <hr style="border-color:#333">
+            <p>Новых за 30 дней: <span id="new-subs" class="good">-</span></p>
+            <p>Истекло (Архив): <span id="expired-subs" style="color:#666">-</span></p>
+        </div>
+
+        <!-- Блок 2: Каналы (Сверка) -->
+        <div class="card">
+            <h2>📢 Телеграм Каналы</h2>
+            <table>
+                <thead><tr><th>Канал</th><th>В базе</th><th>В реале</th><th>Разница</th></tr></thead>
+                <tbody id="channels-table">
+                    <!-- JS заполнит это -->
+                </tbody>
+            </table>
+            <p class="label" style="margin-top:10px">Если "В реале" > "В базе", значит есть "зайцы".</p>
+        </div>
+
+        <!-- Блок 3: Безопасность -->
+        <div class="card">
+            <h2>🛡 Security</h2>
+            <div class="big-num alert" id="banned-count">-</div>
+            <div class="label">Забанено нарушителей</div>
+            <p style="margin-top:15px">Последний инцидент:</p>
+            <div id="last-incident" style="font-size:0.8em; color:#aaa">Загрузка...</div>
+        </div>
+
+        <!-- Блок 4: Сайт -->
+        <div class="card">
+            <h2>🌐 Сайт (Трафик)</h2>
+            <div class="big-num" id="site-today">-</div>
+            <div class="label">Визитов сегодня</div>
+            <p>За 7 дней: <span id="site-week">-</span></p>
+        </div>
+
+    </div>
+
+    <script>
+        const API_URL = 'https://n8n.borodin.live/webhook/admin-stats';
+
+        async function init() {
+            try {
+                const res = await fetch(API_URL);
+                const data = await res.json();
+
+                // 1. Подписки
+                document.getElementById('active-subs').textContent = data.subscriptions.active;
+                document.getElementById('expired-subs').textContent = data.subscriptions.expired;
+                document.getElementById('new-subs').textContent = '+' + data.subscriptions.new_30d;
+
+                // 2. Безопасность
+                document.getElementById('banned-count').textContent = data.security.banned;
+                document.getElementById('last-incident').textContent = "Данные о сливах..."; // Можно допилить
+
+                // 3. Сайт
+                document.getElementById('site-today').textContent = data.website.today;
+                document.getElementById('site-week').textContent = data.website.week;
+
+                // 4. Каналы (Пример логики)
+                // Предположим, API вернул объект channels: { beginner: {db: 10, tg: 12}, ... }
+                // Здесь нужно адаптировать под ваш реальный ответ n8n
+                // const table = document.getElementById('channels-table');
+                // ... код генерации строк ...
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'grid';
+
+            } catch (e) {
+                document.getElementById('loading').innerText = 'Ошибка загрузки: ' + e.message;
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
