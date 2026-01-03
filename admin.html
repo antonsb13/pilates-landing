@@ -106,11 +106,11 @@
             document.getElementById('traffic-today').innerText = data.traffic.today;
 
             // 2. Рендерим Таблицу Пользователей
-            // Проверяем, есть ли данные, иначе пустой массив
             const users = data.users_table || [];
             
             new gridjs.Grid({
                 columns: [
+                    "Sub ID",  // <--- Новая колонка
                     "User ID",
                     "Имя", 
                     "Уровень", 
@@ -118,36 +118,40 @@
                     "Истекает", 
                     { 
                         name: "Действия",
-                        // Форматируем кнопку: Если забанен -> Unban, если активен -> Ban
                         formatter: (cell, row) => {
-                            // row.cells[0].data - это User ID (первая колонка)
-                            // row.cells[3].data - это Статус (четвертая колонка)
-                            // ВАЖНО: индексы зависят от порядка колонок выше
-                            const userId = row.cells[0].data;
-                            const isBanned = row.cells[3].data === true || row.cells[3].data === 'true'; 
+                            // ВАЖНО: Индексы сдвинулись из-за новой колонки!
+                            // row.cells[0].data = Sub ID
+                            // row.cells[1].data = User ID
+                            // row.cells[4].data = Статус (banned/active)
                             
+                            const subId = row.cells[0].data;
+                            const userId = row.cells[1].data;
+                            // Проверяем, забанен ли юзер (данные передаем в 6-й столбец ниже)
+                            const isBanned = row.cells[4].data === true || row.cells[4].data === 'true' || row.cells[4].data === 'banned'; 
+                            
+                            // Передаем теперь ТРИ параметра: userId, subId, action
                             if (isBanned) {
-                                return gridjs.html(`<button class="action-btn btn-unban" onclick="userAction('${userId}', 'unban')">UNBAN</button>`);
+                                return gridjs.html(`<button class="action-btn btn-unban" onclick="userAction('${userId}', '${subId}', 'unban')">UNBAN</button>`);
                             } else {
-                                return gridjs.html(`<button class="action-btn btn-ban" onclick="userAction('${userId}', 'ban')">BAN</button>`);
+                                return gridjs.html(`<button class="action-btn btn-ban" onclick="userAction('${userId}', '${subId}', 'ban')">BAN</button>`);
                             }
                         }
                     }
                 ],
                 data: users.map(u => [
-                    u.user_id,
+                    u.subscription_id, // <--- 0. Sub ID
+                    u.user_id,         // <--- 1. User ID
                     u.first_name + (u.username ? ` (@${u.username})` : ''),
                     u.level,
-                    u.banned ? true : u.status, // Статус для логики кнопок
+                    u.banned ? true : u.status, // <--- 4. Статус для логики
                     u.expires_date,
-                    null // Колонка действий (пустышка, заполнится форматтером)
+                    null 
                 ]),
-                search: true, // Включаем поиск
-                pagination: { limit: 10 }, // По 10 строк
-                sort: true, // Включаем сортировку
+                search: true,
+                pagination: { limit: 10 },
+                sort: true,
                 language: { search: { placeholder: 'Поиск...' } }
             }).render(document.getElementById("users-grid"));
-
 
             // 3. Рендерим Таблицу Оплат
             const payments = data.revenue_table || [];
@@ -178,9 +182,10 @@
     }
 
     // --- ФУНКЦИЯ ДЛЯ КНОПОК ---
-    window.userAction = async (userId, action) => {
+    // Добавили аргумент subId
+    window.userAction = async (userId, subId, action) => {
         const confirmText = action === 'ban' ? 
-            `⛔️ ВНИМАНИЕ!\nВы точно хотите ЗАБАНИТЬ пользователя ${userId}?` : 
+            `⛔️ ВНИМАНИЕ!\nВы точно хотите ЗАБАНИТЬ пользователя ${userId} (Sub #${subId})?` : 
             `✅ Разблокировать пользователя ${userId}?`;
 
         if(!confirm(confirmText)) return;
@@ -189,12 +194,13 @@
             const res = await fetch(ACTION_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: userId, action: action })
+                // Отправляем теперь и subscription_id
+                body: JSON.stringify({ user_id: userId, subscription_id: subId, action: action })
             });
             
             if (res.ok) {
                 alert('Успешно! Страница перезагрузится.');
-                location.reload(); // Перезагружаем, чтобы обновить таблицу
+                location.reload(); 
             } else {
                 alert('Ошибка сервера.');
             }
@@ -202,7 +208,7 @@
             alert('Ошибка сети: ' + e.message);
         }
     };
-
+    
     // Запуск
     loadData();
 </script>
