@@ -61,12 +61,38 @@
 
     <!-- Верхние цифры -->
     <div class="grid">
+        <!-- Блок Финансы (Обновленный) -->
         <div class="card">
-            <h2>💰 Finance (MRR)</h2>
-            <div class="big-number money" id="mrr-val">-</div>
-            <div class="sub-text">Прогноз выручки (Активные KZT)</div>
-            <div style="margin-top: 10px;">Активных подписок: <span id="active-val" style="color:#fff">-</span></div>
+            <h2>💰 Finance</h2>
+            
+            <div class="label">Выручка (30 дней):</div>
+            <div class="big-number money" id="rev-30d-val">-</div>
+            
+            <div style="border-top: 1px solid #30363d; margin: 10px 0; padding-top: 10px;">
+                <div class="sub-text">Прогноз MRR (Активные): <span id="mrr-val" style="color: #fff">-</span></div>
+            </div>
         </div>
+
+        <!-- Блок Пользователи (Обновленный) -->
+        <div class="card">
+            <h2>👥 Users Base</h2>
+            <div class="big-number" id="active-val">-</div>
+            <div class="sub-text">Активных подписчиков</div>
+            
+            <div style="margin-top: 15px; font-size: 0.9em; color: #8b949e;">
+                Всего в базе: <span id="total-users-val" style="color: #fff; font-weight: bold;">-</span>
+            </div>
+        </div>
+        
+        <!-- Блок Популярность (НОВЫЙ) -->
+        <div class="card">
+            <h2>🏆 Top Courses</h2>
+            <div style="height: 150px; position: relative;">
+                <canvas id="popularityChart"></canvas>
+            </div>
+        </div>
+
+        <!-- ... Дальше идут блоки Security, Traffic и Ghost Detector как были ... -->
         <div class="card">
             <h2>🛡 Security</h2>
             <div class="big-number" style="color: #f85149;" id="banned-val">-</div>
@@ -103,13 +129,22 @@
             const res = await fetch(API_URL);
             const data = await res.json();
 
-            // 1. Заполняем цифры
+            // 1. Финансы
+            document.getElementById('rev-30d-val').innerText = new Intl.NumberFormat('ru-RU').format(data.finance.revenue_30d) + ' ₸';
             document.getElementById('mrr-val').innerText = new Intl.NumberFormat('ru-RU').format(data.finance.mrr) + ' ₸';
+
+            // 2. Пользователи
             document.getElementById('active-val').innerText = data.finance.active_total;
+            document.getElementById('total-users-val').innerText = data.users.total;
+
+            // 3. Security & Traffic (как было)
             document.getElementById('banned-val').innerText = data.security.banned;
             document.getElementById('traffic-today').innerText = data.traffic.today;
 
-            // 2. Рендерим Таблицу Пользователей
+            // 4. График Популярности (НОВОЕ)
+            renderChart(data.stats.popularity);
+
+            // 5. Рендерим Таблицу Пользователей
             const users = data.users_table || [];
             
             new gridjs.Grid({
@@ -212,6 +247,41 @@
             alert('Ошибка сети: ' + e.message);
         }
     };
+    
+    // --- ГРАФИК ---
+    let popChart = null;
+    
+    function renderChart(popData) {
+        const ctx = document.getElementById('popularityChart').getContext('2d');
+        
+        // Подготовка данных
+        const labels = popData.map(i => i.level.toUpperCase());
+        const values = popData.map(i => i.count);
+        
+        if (popChart) popChart.destroy(); // Удаляем старый, если есть
+
+        popChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: ['#3fb950', '#d29922', '#a371f7'], // Зеленый, Желтый, Фиолетовый
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'right',
+                        labels: { color: '#c9d1d9', boxWidth: 12, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    }
     
     // Запуск
     loadData();
